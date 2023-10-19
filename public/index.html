@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="../node_modules/izitoast/dist/css/iziToast.min.css">
+  <script src="../node_modules/izitoast/dist/js/iziToast.min.js" type="text/javascript"></script>
+  <title>Login Adera</title>
+</head>
+<body>
+  <main>
+    <form class="form-login" id="form-login">
+      <h1>Login</h1>
+      <div class="labeled-input">
+        <label for="email">E-mail</label>
+        <input type="text" name="email" id="input-email">
+      </div>
+      <div class="labeled-input">
+        <label for="email">Senha</label>
+        <img src="assets/eye-solid.svg" width="17" id="password-reveal">
+        <input type="password" name="password" id="input-password">
+      </div>
+      <button type="submit" id="btn-entrar">Entrar</button>
+    </form>
+  </main>
+  <script>
+
+      const emailInput = document.getElementById('input-email')
+      const passwordInput = document.getElementById('input-password');
+      document.getElementById('password-reveal').addEventListener('click', (e) => {
+        passwordInput.type = passwordInput.type == 'password' ? 'text' : 'password'
+        e.target.src = passwordInput.type == 'password' ? 'assets/eye-solid.svg' : 'assets/eye-slash-solid.svg'
+      })
+
+      const btnEntrar = document.getElementById('btn-entrar')
+      btnEntrar.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log(emailInput.value)
+        console.log(passwordInput.value)
+        fetch('/usuario/autenticar', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: emailInput.value,
+            senha: passwordInput.value
+          })
+        }).then((res) => {
+          res.json().then(json => localStorage.setItem('usuario', JSON.stringify(json)))
+
+          localStorage.setItem('logged', true);
+
+        })
+      })
+  </script>
+</body>
+</html>
