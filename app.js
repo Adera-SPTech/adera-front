@@ -21,5 +21,5 @@ app.use("/", indexRouter);
 app.use('/usuario', usuarioRouter)
 
 app.listen(PORTA, () => {
-  console.log(`App rodando na porta ${PORTA}`)
+  console.log(`App rodando na porta ${PORTA}\nhttp://localhost:${PORTA}`)
 });
