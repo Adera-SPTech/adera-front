@@ -19,14 +19,19 @@ function cadastrar(req, res) {
 function autenticar(req, res) {
   model.autenticar(req.body.email, req.body.senha)
     .then(result => {
-      res.json({
-        id: result[0].id,
-        email: result[0].email,
-        senha: result[0].senha,
-        nome: result[0].nome,
-        sobrenome: result[0].sobrenome,
-        idEstabelecimento: result[0].fkEstabelecimento
-      })
+      console.log(result)
+      if(result.length > 0) {
+        res.json({
+          id: result[0].id,
+          email: result[0].email,
+          senha: result[0].senha,
+          nome: result[0].nome,
+          sobrenome: result[0].sobrenome,
+          idEstabelecimento: result[0].fkEstabelecimento
+        })
+      } else {
+        res.status(400)
+      }
     })
 }
 
