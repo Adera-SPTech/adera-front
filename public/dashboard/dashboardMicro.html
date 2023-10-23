@@ -21,20 +21,28 @@
             <i class="bi bi-list" style="font-size: 3.5rem; color: aliceblue;"></i>
           </li>
           <li>
-            <i class="bi bi-house" style="font-size: 3.5rem; color: aliceblue;"></i>
-            <span id="dashboardMacro"></span>
+            <a href="./index.html">
+              <i class="bi bi-house" style="font-size: 3.5rem; color: aliceblue;"></i>
+              <span id="dashboardMacro"></span>
+            </a>
           </li>
           <li>
-            <i class="bi bi-sliders2" style="font-size: 3.5rem; color: aliceblue;"></i>
-            <span id="parametrizacao"></span>
+            <a href="./parametrizacao.html">
+              <i class="bi bi-sliders2" style="font-size: 3.5rem; color: aliceblue;"></i>
+              <span id="parametrizacao"></span>
+            </a>
           </li>
           <li>
-            <i class="bi bi-people" style="font-size: 3.5rem; color: aliceblue;"></i>
-            <span id="gerenciamentoUsuario"></span>
+            <a href="./gerenciarUsuario.html">
+              <i class="bi bi-people" style="font-size: 3.5rem; color: aliceblue;"></i>
+              <span id="gerenciamentoUsuario"></span>
+            </a>
           </li>
           <li>
-            <i class="bi bi-exclamation-triangle" style="font-size: 3.5rem; color: aliceblue;"></i>
-            <span id="alertas"></span>
+            <a href="./alertas.html">
+              <i class="bi bi-exclamation-triangle" style="font-size: 3.5rem; color: aliceblue;"></i>
+              <span id="alertas"></span>
+            </a>
           </li>
         </ul>
       </div>
@@ -163,44 +171,50 @@
         <div class="machineContent">
           <section id="charts" class="charts">
           </section>
-          <section class="alerts">
-            <ul>
-              <li>
-                <span style="font-size: 2rem;">
-                  Alertas
-                </span>
-              </li>
-              <li>
-                <i class="bi bi-exclamation-triangle" style="font-size: 6rem;"></i>
-              </li>
-            </ul>
-            <div style="flex-direction: column;">
-              <li style="background-color: rgba(235, 14, 14, 0.603);">
-                <span>
-                  Aviso Crítico
-                </span>
-                <span>
-                  Cpu da Maquina 1 acima do nivel crítico
-                </span>
-              </li>
-              <li style="background-color: rgba(212, 200, 21);">
-                <span>
-                  Aviso Atenção
-                </span>
-                <span>
-                  Rede da Maquina 1 acima do nivel Atenção
-                </span>
-              </li>
-              <li style="background-color: rgba(235, 14, 14, 0.603);">
-                <span>
-                  Aviso Crítico
-                </span>
-                <span>
-                  Ram da Maquina 1 acima do nivel crítico
-                </span>
-              </li>
+          <div>
+            <section class="alerts">
+              <ul>
+                <li>
+                  <span style="font-size: 2rem;">
+                    Alertas
+                  </span>
+                </li>
+                <li>
+                  <i class="bi bi-exclamation-triangle" style="font-size: 6rem;"></i>
+                </li>
+              </ul>
+              <div style="flex-direction: column;">
+                <li style="background-color: rgba(235, 14, 14, 0.603);">
+                  <span>
+                    Aviso Crítico
+                  </span>
+                  <span>
+                    Cpu da Maquina 1 acima do nivel crítico
+                  </span>
+                </li>
+                <li style="background-color: rgba(212, 200, 21);">
+                  <span>
+                    Aviso Atenção
+                  </span>
+                  <span>
+                    Rede da Maquina 1 acima do nivel Atenção
+                  </span>
+                </li>
+                <li style="background-color: rgba(235, 14, 14, 0.603);">
+                  <span>
+                    Aviso Crítico
+                  </span>
+                  <span>
+                    Ram da Maquina 1 acima do nivel crítico
+                  </span>
+                </li>
+              </div>
+            </section>
+            <div class="medidas">
+              <button type="submit" id="btn-entrar">Reiniciar agora</button>
+              <button type="submit" id="btn-entrar">Limpar Cache</button>
             </div>
-          </section>
+          </div>
         </div>
       </div>
     </div>
