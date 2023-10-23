@@ -62,7 +62,7 @@
         </div>
       </div>
       <div class="title">
-        <button id="newUser">Adicionar Usuário +</button>
+        <button id="newUser" onclick="modalUsuario()">Adicionar Usuário +</button>
       </div>
       <div class="users">
           <div id="user">
@@ -151,6 +151,28 @@
 </div> 
       </div>
     </div>
+    <div id="modalLogin">
+      <div id="boxModal">
+        
+        <h1>Informações</h1>
+        <h3>Nome</h3>
+        <input type="text" id="nome">
+        <h3>Sobrenome</h3>
+        <input type="text" id="sobrenome">
+        <h3>Email</h3>
+        <input type="text" id="email">
+        <h3>Senha</h3>
+        <input type="text" id="senha">
+        <h3>Confirmação de Senha</h3>
+        <input type="text" id="senhaConf">
+        <h3>Cargo</h3>
+        <input type="text" id="cargo">
+        <button >Criar</button>
+
+        
+      </div>
+      </div>
+      
   </body>
 </html>
 <script>
@@ -178,5 +200,14 @@
       alertas.innerHTML = "";
     }
   });
+
+  function modalUsuario() {
+    const modal = document.getElementById("modalLogin");
+    if(modal.style.display == "none"){
+      modal.style.display = "block";
+    }else{
+      modal.style.display = "none";
+    }
+  }
 
 </script>

@@ -9,6 +9,8 @@ body{
     display: flex;
     height: 100%;
     background-color: rgb(90, 68, 235);
+    font-family: "Montserrat", sans-serif;
+
 }
 main{
     display: flex;
@@ -252,6 +254,7 @@ main{
     font-size: 20px;
     margin: 0;
     color: #fff;
+    cursor: pointer;
 }
 .users {
     display: flex;
@@ -260,7 +263,6 @@ main{
 }
 
 #user {
-    font-family: "Montserrat", sans-serif;
     background-color: #fff;
     color: #000;
     width: 18%;
@@ -301,4 +303,61 @@ main{
     width: 6vh;
     padding: 0;
 
+}
+#modalLogin { 
+    display: none;
+    position: absolute;
+    background: rgba(255, 255, 255, .95);
+    height: 90vh;
+    width: 100vw;
+    padding: 10vh 0 0 0;
+    align-items: center;
+    justify-content: center;
+}
+#boxModal {
+    color: #fff;
+    padding: 4vh 0 0 0  ;
+    background-color: #9673ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40vw;
+    height: 80vh;
+    margin: 0 auto;
+    border-radius: 30px;
+    border: 4px solid #fff;
+}
+#boxModal h1 {
+    margin: 0 0 4vh 0;
+}
+input {
+    height: 1.5vh;
+    width: 20vw;
+    margin: 1vh;
+    font-size: 18px;
+    border: none;
+    border-radius: 15px;
+    border-left: 2px solid #571eff;
+    border-bottom: 2px solid #561eff;
+    padding: 2vh;
+}
+#boxModal button {
+    background-color: #fff;
+    border: none;
+    border-radius: 99px;
+    height: 6vh;
+    width: 20vw;
+    padding: 2vh;
+    font-size: 18px;
+    font-weight: bolder;
+    margin: 2vh 0 0 0;
+    color: #c1acff;
+    transition: 0.5s;
+
+}
+
+#boxModal button:hover {
+    background-color: #c1acff;
+    color: #fff;
+    transition: 0.5s;
 }
