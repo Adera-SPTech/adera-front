@@ -55,7 +55,7 @@ main{
     color: aliceblue;
     padding-left: 2rem;
 }
-.navbar{
+.navbarAdera{
     display: flex;
     height: 3rem;
     justify-content: end;
@@ -63,7 +63,7 @@ main{
     color: var(--primary-text-color);
     font-size: 1.75rem;
 }
-.navbar span{
+.navbarAdera span{
     background-color: white;
     display: flex;
     justify-content: center;

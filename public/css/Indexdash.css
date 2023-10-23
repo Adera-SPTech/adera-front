@@ -52,7 +52,7 @@ main{
     color: aliceblue;
     padding-left: 2rem;
 }
-.navbar{
+.navbarAdera{
     display: flex;
     height: 3rem;
     justify-content: end;
@@ -60,7 +60,7 @@ main{
     color: var(--primary-text-color);
     font-size: 1.75rem;
 }
-.navbar span{
+.navbarAdera span{
     background-color: white;
     display: flex;
     justify-content: center;
@@ -239,4 +239,84 @@ main{
     font-family: "Montserrat", sans-serif;
     font-size: 2rem;
     color: var(--primary-text-color);
+}
+.parametContent{
+    background-color: var(--primary-color);
+    border-radius: 2rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    margin-left: 5%;
+    height: 90%;
+    flex-wrap: wrap;
+    margin-bottom: 4%;
+}
+.alertsView{
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 80%;
+    height: fit-content;
+    border-radius: 2rem;
+    margin-bottom: 6rem;
+    padding-bottom: 4rem;
+}
+.alertsView div{
+    width: fit-content;
+}
+.alertsView ul{
+    font-family: "Montserrat", sans-serif;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 4rem;
+    width: 70%;
+    height: fit-content;
+    background-color: white;
+}
+.alertsView i{
+    display: flex;
+}
+.alertsView div{
+    font-family: "Montserrat", sans-serif;
+    width: 90%;
+}
+.alertsView>div>li{
+    border-radius: 2rem;
+    width: 100%;
+}
+.alertsView li{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-text-color);
+}
+.alertsView span{
+    display: flex;
+}
+.titleAlerts{
+    display: flex;
+    width: 100%;
+    height: 6rem;
+    font-family: "Montserrat", sans-serif;
+    color: var(--primary-text-color);
+    align-items: end;
+    justify-content: center;
+    font-size: 3rem;
+    padding-bottom: 1rem;
+}
+.alertFilter{
+    width: 70%;
+    margin-left: 15%;
+    margin-bottom: 1rem;
 }
