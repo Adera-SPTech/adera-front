@@ -122,3 +122,29 @@
 </body>
 
 </html>
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const sandwich = document.getElementById("sandwich-menu");
+  const dashboardMacro = document.getElementById("dashboardMacro");
+  const parametrizacao = document.getElementById("parametrizacao");
+  const gerenciamentoUsuario = document.getElementById("gerenciamentoUsuario");
+  const alertas = document.getElementById("alertas");
+  const sair = document.getElementById("sair");
+  
+  sandwich.addEventListener("click", () => {
+    sidebar.classList.toggle("open-sidebar");
+    if (sidebar.classList.contains("open-sidebar")) {
+      dashboardMacro.innerHTML = "Dashboard Macro";
+      parametrizacao.innerHTML = "Parametrizações";
+      gerenciamentoUsuario.innerHTML = "Gerenciar Usúarios";
+      alertas.innerHTML = "Alertas";
+      sair.innerHTML = "Sair";
+    } else {
+      dashboardMacro.innerHTML = "";
+      parametrizacao.innerHTML = "";
+      gerenciamentoUsuario.innerHTML = "";
+      sair.innerHTML = "";
+      alertas.innerHTML = "";
+    }
+  });
+</script>
