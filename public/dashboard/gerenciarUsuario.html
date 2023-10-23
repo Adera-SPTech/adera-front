@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciar Usuários</title>
+    <link rel="shortcut icon" href="../assets/icone_branco.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/gerenciarUsuario.css" />
+    <link rel="stylesheet" href="../colors.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body class="body">
+    <div class="sidebar" id="sidebar">
+      <div style="padding-top: 3vh">
+        <ul>
+          <li id="sandwich-menu">
+            <i class="bi bi-list" style="font-size: 3.5rem; color: aliceblue;"></i>
+          </li>
+          <li>
+            <a href="./index.html">
+              <i class="bi bi-house" style="font-size: 3.5rem; color: aliceblue;"></i>
+              <span id="dashboardMacro"></span>
+            </a>
+          </li>
+          <li>
+            <a href="./parametrizacao.html">
+              <i class="bi bi-sliders2" style="font-size: 3.5rem; color: aliceblue;"></i>
+              <span id="parametrizacao"></span>
+            </a>
+          </li>
+          <li>
+            <a href="./gerenciarUsuario.html">
+              <i class="bi bi-people" style="font-size: 3.5rem; color: aliceblue;"></i>
+              <span id="gerenciamentoUsuario"></span>
+            </a>
+          </li>
+          <li>
+            <a href="./alertas.html">
+              <i class="bi bi-exclamation-triangle" style="font-size: 3.5rem; color: aliceblue;"></i>
+              <span id="alertas"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div style="padding-bottom: 3vh">
+        <ul>
+          <li>
+            <i class="bi bi-box-arrow-left" style="font-size: 3.5rem; color: aliceblue;"></i>
+            <span id="sair"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div style="width: calc(100% - 5rem); margin-left: 5rem; background-color: rgb(90, 68, 235);">
+      <div class="navbarAdera">
+        <div class="logo">
+          <img src="../assets/icone_branco.png" alt="">
+        </div>
+        <span>
+          Olá, Nicolas
+        </span>
+      </div>
+      <div class="content">
+        <div class="title">
+          Gerenciar Usuários
+        </div>
+      </div>
+      <div class="title">
+        <button id="newUser" onclick="modalUsuario()">Adicionar Usuário +</button>
+      </div>
+      <div class="users">
+          <div id="user">
+            <div id="info">
+              <div id="personalInfo">
+                <img src="data:image/png;base64,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" alt="Brasil">
+                <h2>Lucas Cavalcante</h2>
+              </div>
+              <h3 id="emailInfo">lucas@gmail.com</h3>
+              <h3 id="roleInfo">Gerente</h3>
+            </div>
+            <div id="userActions">
+              <button><img src="../assets/edit-ico.svg" alt="Icone para edição"></button>
+              <button><img src="../assets/close-ico.svg" alt="Icone para remoção"></button>
+            </div>
+        </div>
+        <div id="user">
+          <div id="info">
+            <div id="personalInfo">
+              <img src="data:image/png;base64,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" alt="Brasil">
+              <h2>Icaro Bezerra</h2>
+            </div>
+            <h3 id="emailInfo">icaro@gmail.com</h3>
+            <h3 id="roleInfo">Gerente</h3>
+          </div>
+          <div id="userActions">
+            <button><img src="../assets/edit-ico.svg" alt="Icone para edição"></button>
+            <button><img src="../assets/close-ico.svg" alt="Icone para remoção"></button>
+          </div>
+      </div>
+      <div id="user">
+        <div id="info">
+          <div id="personalInfo">
+            <img src="data:image/png;base64,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" alt="Brasil">
+            <h2>Icaro Bezerra</h2>
+          </div>
+          <h3 id="emailInfo">icaro@gmail.com</h3>
+          <h3 id="roleInfo">Gerente</h3>
+        </div>
+        <div id="userActions">
+          <button><img src="../assets/edit-ico.svg" alt="Icone para edição"></button>
+          <button><img src="../assets/close-ico.svg" alt="Icone para remoção"></button>
+        </div>
+    </div>
+    <div id="user">
+      <div id="info">
+        <div id="personalInfo">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAABL1BMVEUAmzr+3wAAJ3b/////4wD/4gAAmTsAlT3/3wAAlzwAmjv/5wAAJXUAHXgAAHsAInQAH3MAAGwAGHEAHHIAGXkAFHAACnoAGXHkyiHLtTcADXoAEXrs0Rn22Q2qm0cAFnk8R2xxsC7v2gsADG6yokOEfVcADW7l1hCowSNWqTK+yB3QzxiKuCk0ojahvyXTvS3CrjmQh1JeYGQrO3BIT2lwbl5TWGczRoVweqNAqV1dapmQmLcpoDdHpjRirDDFyxt8syyVuyfn1w/Y2OfO6dOJxpahz6wtpFC63MLW6tt4vokeNn3Mz92jqcLo6vBAUIp4dFu0us6FjrDe1qjx+/HB3scAgwD56ZM3plZVsW5ruX/59+b53jGQyJ7p5/IgPYxoc5/58cf54l5AU5NPXpMSKZuKAAALZklEQVR4nO1d+0PayBaeMAEFAkmIgSoqtijrdrfVum1B6WNb3u+GxbbQi9d7L///33BnhqeaCUl4h/l+qBZR5suZOd+ZM2dmAGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgoMKz6gYsGD7vc69v1Y1YJLyvfuO/vvKuuhkLg8d7znMcx597HdpVvb+/cHMY7he/O9GMHs9LnhuCf+lxmhl9O885NzeGm3u+4yiP4wF/8LvcJHb5PxwkHL6dP91u7jHc7j+dYkYsEbtPCGIz/uYI4fB4X/M69AYe5/XmC8dIIvSx8cLxQCIoZtxk4XgsERQzbq5wYImYyo+YcTOFw7fzt45EUMy4icLh/aAvEfpAwvFhszyOz/vFXAed6KqvN2ni6P1oKBH6cL/4uClm9HjOrRpwYMbzjRAO384nGwYcmPHo0/p7HA/4bM+AAzN+XnPhQBJhQuMNzcj9vc5m9H54PA181Hy3m+d5t6FOoonj2gqHb+cLrem7bt7v9x89u9i/vLzcv3h2hP7Hu2kPw/1lPc3offWV0mbez18cfzuJBcMHUYyDcDB68u34Ar1OeR5f11A4BplCPXqHx1fhcCwgCa4xBCkQC4evjg8pJNcv40iZBrr93OnbYEyZJDdBU4kF355yft3ffPFpnczo8elOA93+w7NoVNJlN4QUPTg71OXIv/Stixlp00D/4btgQN96DywZCL479Os9oHWZOHqfZAr7JuDOgoGp9PoIBM84nU6wHsKhnylEBjzd2zPJD2Nv71TXjKufOFIyhfzR+/D0/vmgr4bfH+macbUZR5pE+PdjZjvoGIHYvp4ZVyoctEyh/03QmgEHZgy+0aW4sowjNVPIXx3Y4IdxcMXrPrKVZBypmUI3d2LFxTzE3gntjy5dOJ4uJo3a8pf1IThG4C99isteqqJJBMZMBAlFfSxVOAwyhfzJbAQRxRNKjmB5wuEzWEzyX9kfg0PsXel6VPL8lpJxNMoU+t/Y9aKTONAXDdJVF59xNFxM4veDcyDocgX3DT5jscLh2/lklGg6itkR+qcQYkf0D3FzC8w4TskU+t/P6mWGCLyn9lNugRnHaZlC/jQ8J4IuV/jU6FEuKOM4LVPIcXvz6aMYwp7hJy1iqcogUziA/2x2oRhj78yon2I7fpmvcHg/0jKFo088nI8fHSJ4OOWJzjXjSM0UTprwXcAlSkpITcTjcZkgHk8k1JAiiXZ6b+DdFCPOc+JoZjHJfSjLoeRNKl3TtGo1Q1CtarVaM9WrIMZxVRHnbESScdyZAz+Pz8xi0u4/dxChlS1mIcyVcxCWyuVcCWZbsIVez2i1VFKWEyHzNAPTRiIx4+eZM46mF5Ng6+d1C+Zzt+0S9Lay1/A23yq1YDsHv2OKBHdaE9FUjROoQwhRMx87s3BMl4g+dn/AAmxdw2Iu/7OFvoWIYaHdgbDdyQPCLnddzpJvMumGHI+YGJpRQ00cffJMGUcsEeZWA3d/YVoeWCyX2i3owTbMFzGfdrndJsSub7N9W+YQ0WpTkFXUYQVZk6kMpbcmuimG/aUqWk2hDv4FYbdc7qKuCYslmOvgcdjptG9hp1u8HjDskq+lct5Twj02XZFVVwZqEtWcwUNzH77rtlccb0YiRp/xA7U52++FsH5H/Gg1c3dXJ96HvArKefK1287mirDtKbdgPZ1o1lIK1YixY9MNsCMcU2oKHzH8BetVLY2EISE/QiTZS6W1TB25WcLwZyuPqBZgiZi2eiOrVBsq9KnwE1jOOJqoKZwkyP9bxlIQ0hF3QZQiKuKt9ppaBnEiliy2C+0uLBUKyL41l0xxrkLYQlWVtaUqczWFEw/wgmSApQplnbDvOCKIZyNdJf6nBX9ix4T/RYZsyPpdNXxhqRXmM47UTCH18R3HUHvEhpZKGquAIIXiiCW2ZYfQQw64XSjBzI0uRwsDEcNsxtEoU0iB/xue+ko9WK+Y0DlRlSMpbMpOuZCFKEDwYdd6r8Mx8M38QCQwlXG0IBFjhid4JAmVWk2dTpDYMiLHEUkU82ANRYb8noP1myfjUTqxyNBExtEoU2jAMEpMJ6gmCRIospRGalLOocCumy35WjDTkB+GrULMKkNuWnG8rZpCjjuyNzUUQnJPQyEACvMKxesScrNVV+JBNw8aZKSoMBAOaxIx8Sef2UzQCKGILNSQgtxCFP5kO4UiTD8YjuFntkrIKBnHKZlCI4YX9vLAQiXdEAVVbkLiVD1lmLvFw3FsxgNLcjHRIj3hmKGm0L0ftcdQgc0I6axNNCDzxRZWxxKshkIjhvs2ywB1hMNrvuz8CfhLA4aG8iFV+u9BHFGEg0PzfBsNyPuhGaOXtis5kXA8GI2ecxteywxDSTQ1q0ccayiWgy0UrqJQp5pQZmWIPPy5Zwk2FBpaw2TiIiGgKKBbvG2T6UhPnrMNFzUOQ2nYM5e0wNPhXh1e57+jcK5dhjXcU+c5DhfkS8Ve0qwNESQ5TeKcdqlbhBlJma8vXZAeiubG4RCJCorKv8MC5gl78fnqIRmNS4hp6HN68kSQV73tdJBbzeVhU55zTANmjEtNIX4fN35DonLXKkLoy+a7sGbjeU/dtGl/bjGGRFfBSBqmI8YURSQc8LYLW234y2pLTFUz2J4fDtqHCN5kqJMM6aZ2M825CvINbBVK11n4H4sMzVak2Jzj923UUEVXhTIRJqkOkvKeQjLkumt1SxD+sNQMC1VF1vM0Q2cq3VfTPZHSSYXK8AfqvWw8ckWZ5HP+a4Wgtcowq7m2YTGpmIT1EKXxglTV+qkq6d4oEdx/M5JGCK0QtFwWbilf6r/CGoDaLCRT6RCt1UpqkP4VKlpzirtxueR7K47GToWmlZw3GYhE3AVl1PSnY01RxL4LEhJUVRwHCOr/zA9Dm4ulFoQDL3E3tORE/CLEb54aU+xpVAsPHkKy/2TwX1r0ugWwsvbkfyupNfggBK3C3pOATUjeT9l9ca9pWE1U9LCWsPYEzK8f8qdR8SY5mQ9W05rOioQwRSYEEdbRr4VqdZewjPVDYGENOCqIDxctIgkKCUOKlVRTwXFBKrKkNWBgdh3ff/ao4itCW24RjCkqaiUiuNDMaVnr+BjmajEezi8q6aejkBCUNWOxF3vVFAmJlleLAczX00wgcUfJ8Fdh1dCGggQ13L+XWk8D7NRECf0B99iQoabWNBIMQaxUGqIZE857F6b1ujZCMNR4REdwxY18jVhJ9rNzS69rA/ZqEyupu1TlMcXRuybjg34pkZDM1EnYsILaRGCrvlRF813qVDHUUIbGFio11DWliJjQNJICWEl9KbBRI6yketRaCyXVj4HEJHoGiXo6JPW0htjP6K+oRhjYqPNWJHqI3Wj2zVdPR5CDwS/UB1q5ujpvMNdafbE/WQylcSAqkQqpwU9WWKuPMdf9FjjQw9GP0kuOY6DV7rcAc90zo/QqxIeKyfq4yGHle2bA/PY9IWJ3fWJqeuRz12DfE5jf3rX4qHpjtCq6HnvXwNz2H6pDYhFlRHAt9h+Cue8hraWIp1mjPaTA9j5g3bg7XiXd9eCK8hdXdfKgnb3ckZpeHlFQJGH99nIDo/34e7TBKOjvvkDRzDruxwd2zlSgvbyeZyqALTgXAzj/bBOwBefTgBnPGIqu/xlDGE4/JwrYO+vrYJPO+gIWzms72Mzz2oBxxtERZ+4B55+bCLbg7Evg/PNLwRacQQucf44whtPPggZbcJ43cP6Z7GALztUHzr8bAWzB/RbA+XeUYDj9nhmwBXcFAeff9wS24M4u4Px718AW3J0HnH//IYbT77AEW3APKXD+XbJgC+4DBs6/05mBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYFhJvwfDBuexvjttLIAAAAASUVORK5CYII=" alt="Brasil">
+          <h2>Icaro Bezerra</h2>
+        </div>
+        <h3 id="emailInfo">icaro@gmail.com</h3>
+        <h3 id="roleInfo">Gerente</h3>
+      </div>
+      <div id="userActions">
+        <button><img src="../assets/edit-ico.svg" alt="Icone para edição"></button>
+        <button><img src="../assets/close-ico.svg" alt="Icone para remoção"></button>
+      </div>
+  </div>
+  <div id="user">
+    <div id="info">
+      <div id="personalInfo">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAABL1BMVEUAmzr+3wAAJ3b/////4wD/4gAAmTsAlT3/3wAAlzwAmjv/5wAAJXUAHXgAAHsAInQAH3MAAGwAGHEAHHIAGXkAFHAACnoAGXHkyiHLtTcADXoAEXrs0Rn22Q2qm0cAFnk8R2xxsC7v2gsADG6yokOEfVcADW7l1hCowSNWqTK+yB3QzxiKuCk0ojahvyXTvS3CrjmQh1JeYGQrO3BIT2lwbl5TWGczRoVweqNAqV1dapmQmLcpoDdHpjRirDDFyxt8syyVuyfn1w/Y2OfO6dOJxpahz6wtpFC63MLW6tt4vokeNn3Mz92jqcLo6vBAUIp4dFu0us6FjrDe1qjx+/HB3scAgwD56ZM3plZVsW5ruX/59+b53jGQyJ7p5/IgPYxoc5/58cf54l5AU5NPXpMSKZuKAAALZklEQVR4nO1d+0PayBaeMAEFAkmIgSoqtijrdrfVum1B6WNb3u+GxbbQi9d7L///33BnhqeaCUl4h/l+qBZR5suZOd+ZM2dmAGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgoMKz6gYsGD7vc69v1Y1YJLyvfuO/vvKuuhkLg8d7znMcx597HdpVvb+/cHMY7he/O9GMHs9LnhuCf+lxmhl9O885NzeGm3u+4yiP4wF/8LvcJHb5PxwkHL6dP91u7jHc7j+dYkYsEbtPCGIz/uYI4fB4X/M69AYe5/XmC8dIIvSx8cLxQCIoZtxk4XgsERQzbq5wYImYyo+YcTOFw7fzt45EUMy4icLh/aAvEfpAwvFhszyOz/vFXAed6KqvN2ni6P1oKBH6cL/4uClm9HjOrRpwYMbzjRAO384nGwYcmPHo0/p7HA/4bM+AAzN+XnPhQBJhQuMNzcj9vc5m9H54PA181Hy3m+d5t6FOoonj2gqHb+cLrem7bt7v9x89u9i/vLzcv3h2hP7Hu2kPw/1lPc3offWV0mbez18cfzuJBcMHUYyDcDB68u34Ar1OeR5f11A4BplCPXqHx1fhcCwgCa4xBCkQC4evjg8pJNcv40iZBrr93OnbYEyZJDdBU4kF355yft3ffPFpnczo8elOA93+w7NoVNJlN4QUPTg71OXIv/Stixlp00D/4btgQN96DywZCL479Os9oHWZOHqfZAr7JuDOgoGp9PoIBM84nU6wHsKhnylEBjzd2zPJD2Nv71TXjKufOFIyhfzR+/D0/vmgr4bfH+macbUZR5pE+PdjZjvoGIHYvp4ZVyoctEyh/03QmgEHZgy+0aW4sowjNVPIXx3Y4IdxcMXrPrKVZBypmUI3d2LFxTzE3gntjy5dOJ4uJo3a8pf1IThG4C99isteqqJJBMZMBAlFfSxVOAwyhfzJbAQRxRNKjmB5wuEzWEzyX9kfg0PsXel6VPL8lpJxNMoU+t/Y9aKTONAXDdJVF59xNFxM4veDcyDocgX3DT5jscLh2/lklGg6itkR+qcQYkf0D3FzC8w4TskU+t/P6mWGCLyn9lNugRnHaZlC/jQ8J4IuV/jU6FEuKOM4LVPIcXvz6aMYwp7hJy1iqcogUziA/2x2oRhj78yon2I7fpmvcHg/0jKFo088nI8fHSJ4OOWJzjXjSM0UTprwXcAlSkpITcTjcZkgHk8k1JAiiXZ6b+DdFCPOc+JoZjHJfSjLoeRNKl3TtGo1Q1CtarVaM9WrIMZxVRHnbESScdyZAz+Pz8xi0u4/dxChlS1mIcyVcxCWyuVcCWZbsIVez2i1VFKWEyHzNAPTRiIx4+eZM46mF5Ng6+d1C+Zzt+0S9Lay1/A23yq1YDsHv2OKBHdaE9FUjROoQwhRMx87s3BMl4g+dn/AAmxdw2Iu/7OFvoWIYaHdgbDdyQPCLnddzpJvMumGHI+YGJpRQ00cffJMGUcsEeZWA3d/YVoeWCyX2i3owTbMFzGfdrndJsSub7N9W+YQ0WpTkFXUYQVZk6kMpbcmuimG/aUqWk2hDv4FYbdc7qKuCYslmOvgcdjptG9hp1u8HjDskq+lct5Twj02XZFVVwZqEtWcwUNzH77rtlccb0YiRp/xA7U52++FsH5H/Gg1c3dXJ96HvArKefK1287mirDtKbdgPZ1o1lIK1YixY9MNsCMcU2oKHzH8BetVLY2EISE/QiTZS6W1TB25WcLwZyuPqBZgiZi2eiOrVBsq9KnwE1jOOJqoKZwkyP9bxlIQ0hF3QZQiKuKt9ppaBnEiliy2C+0uLBUKyL41l0xxrkLYQlWVtaUqczWFEw/wgmSApQplnbDvOCKIZyNdJf6nBX9ix4T/RYZsyPpdNXxhqRXmM47UTCH18R3HUHvEhpZKGquAIIXiiCW2ZYfQQw64XSjBzI0uRwsDEcNsxtEoU0iB/xue+ko9WK+Y0DlRlSMpbMpOuZCFKEDwYdd6r8Mx8M38QCQwlXG0IBFjhid4JAmVWk2dTpDYMiLHEUkU82ANRYb8noP1myfjUTqxyNBExtEoU2jAMEpMJ6gmCRIospRGalLOocCumy35WjDTkB+GrULMKkNuWnG8rZpCjjuyNzUUQnJPQyEACvMKxesScrNVV+JBNw8aZKSoMBAOaxIx8Sef2UzQCKGILNSQgtxCFP5kO4UiTD8YjuFntkrIKBnHKZlCI4YX9vLAQiXdEAVVbkLiVD1lmLvFw3FsxgNLcjHRIj3hmKGm0L0ftcdQgc0I6axNNCDzxRZWxxKshkIjhvs2ywB1hMNrvuz8CfhLA4aG8iFV+u9BHFGEg0PzfBsNyPuhGaOXtis5kXA8GI2ecxteywxDSTQ1q0ccayiWgy0UrqJQp5pQZmWIPPy5Zwk2FBpaw2TiIiGgKKBbvG2T6UhPnrMNFzUOQ2nYM5e0wNPhXh1e57+jcK5dhjXcU+c5DhfkS8Ve0qwNESQ5TeKcdqlbhBlJma8vXZAeiubG4RCJCorKv8MC5gl78fnqIRmNS4hp6HN68kSQV73tdJBbzeVhU55zTANmjEtNIX4fN35DonLXKkLoy+a7sGbjeU/dtGl/bjGGRFfBSBqmI8YURSQc8LYLW234y2pLTFUz2J4fDtqHCN5kqJMM6aZ2M825CvINbBVK11n4H4sMzVak2Jzj923UUEVXhTIRJqkOkvKeQjLkumt1SxD+sNQMC1VF1vM0Q2cq3VfTPZHSSYXK8AfqvWw8ckWZ5HP+a4Wgtcowq7m2YTGpmIT1EKXxglTV+qkq6d4oEdx/M5JGCK0QtFwWbilf6r/CGoDaLCRT6RCt1UpqkP4VKlpzirtxueR7K47GToWmlZw3GYhE3AVl1PSnY01RxL4LEhJUVRwHCOr/zA9Dm4ulFoQDL3E3tORE/CLEb54aU+xpVAsPHkKy/2TwX1r0ugWwsvbkfyupNfggBK3C3pOATUjeT9l9ca9pWE1U9LCWsPYEzK8f8qdR8SY5mQ9W05rOioQwRSYEEdbRr4VqdZewjPVDYGENOCqIDxctIgkKCUOKlVRTwXFBKrKkNWBgdh3ff/ao4itCW24RjCkqaiUiuNDMaVnr+BjmajEezi8q6aejkBCUNWOxF3vVFAmJlleLAczX00wgcUfJ8Fdh1dCGggQ13L+XWk8D7NRECf0B99iQoabWNBIMQaxUGqIZE857F6b1ujZCMNR4REdwxY18jVhJ9rNzS69rA/ZqEyupu1TlMcXRuybjg34pkZDM1EnYsILaRGCrvlRF813qVDHUUIbGFio11DWliJjQNJICWEl9KbBRI6yketRaCyXVj4HEJHoGiXo6JPW0htjP6K+oRhjYqPNWJHqI3Wj2zVdPR5CDwS/UB1q5ujpvMNdafbE/WQylcSAqkQqpwU9WWKuPMdf9FjjQw9GP0kuOY6DV7rcAc90zo/QqxIeKyfq4yGHle2bA/PY9IWJ3fWJqeuRz12DfE5jf3rX4qHpjtCq6HnvXwNz2H6pDYhFlRHAt9h+Cue8hraWIp1mjPaTA9j5g3bg7XiXd9eCK8hdXdfKgnb3ckZpeHlFQJGH99nIDo/34e7TBKOjvvkDRzDruxwd2zlSgvbyeZyqALTgXAzj/bBOwBefTgBnPGIqu/xlDGE4/JwrYO+vrYJPO+gIWzms72Mzz2oBxxtERZ+4B55+bCLbg7Evg/PNLwRacQQucf44whtPPggZbcJ43cP6Z7GALztUHzr8bAWzB/RbA+XeUYDj9nhmwBXcFAeff9wS24M4u4Px718AW3J0HnH//IYbT77AEW3APKXD+XbJgC+4DBs6/05mBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYFhJvwfDBuexvjttLIAAAAASUVORK5CYII=" alt="Brasil">
+        <h2>Icaro Bezerra</h2>
+      </div>
+      <h3 id="emailInfo">icaro@gmail.com</h3>
+      <h3 id="roleInfo">Gerente</h3>
+    </div>
+    <div id="userActions">
+      <button><img src="../assets/edit-ico.svg" alt="Icone para edição"></button>
+      <button><img src="../assets/close-ico.svg" alt="Icone para remoção"></button>
+    </div>
+</div>
+<div id="user">
+  <div id="info">
+    <div id="personalInfo">
+      <img src="data:image/png;base64,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" alt="Brasil">
+      <h2>Icaro Bezerra</h2>
+    </div>
+    <h3 id="emailInfo">icaro@gmail.com</h3>
+    <h3 id="roleInfo">Gerente</h3>
+  </div>
+  <div id="userActions">
+    <button><img src="../assets/edit-ico.svg" alt="Icone para edição"></button>
+    <button><img src="../assets/close-ico.svg" alt="Icone para remoção"></button>
+  </div>
+</div> 
+      </div>
+    </div>
+    <div id="modalLogin">
+      <div id="boxModal">
+        <div id="backbtn">
+          <img src="../assets/back.png" alt="" onclick="modalUsuario()">
+        </div>
+        <h1>Informações</h1>
+        <h3>Nome</h3>
+        <input type="text" id="nome">
+        <h3>Sobrenome</h3>
+        <input type="text" id="sobrenome">
+        <h3>Email</h3>
+        <input type="text" id="email">
+        <h3>Senha</h3>
+        <input type="text" id="senha">
+        <h3>Confirmação de Senha</h3>
+        <input type="text" id="senhaConf">
+        <h3>Cargo</h3>
+        <input type="text" id="cargo">
+        <button >Criar</button>
+
+        
+      </div>
+      </div>
+      
+  </body>
+</html>
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const sandwich = document.getElementById("sandwich-menu");
+  const dashboardMacro = document.getElementById("dashboardMacro");
+  const parametrizacao = document.getElementById("parametrizacao");
+  const gerenciamentoUsuario = document.getElementById("gerenciamentoUsuario");
+  const alertas = document.getElementById("alertas");
+  const sair = document.getElementById("sair");
+  
+  sandwich.addEventListener("click", () => {
+    sidebar.classList.toggle("open-sidebar");
+    if (sidebar.classList.contains("open-sidebar")) {
+      dashboardMacro.innerHTML = "Dashboard Macro";
+      parametrizacao.innerHTML = "Parametrizações";
+      gerenciamentoUsuario.innerHTML = "Gerenciar Usúarios";
+      alertas.innerHTML = "Alertas";
+      sair.innerHTML = "Sair";
+    } else {
+      dashboardMacro.innerHTML = "";
+      parametrizacao.innerHTML = "";
+      gerenciamentoUsuario.innerHTML = "";
+      sair.innerHTML = "";
+      alertas.innerHTML = "";
+    }
+  });
+
+  function modalUsuario() {
+    const modal = document.getElementById("modalLogin");
+    if(modal.style.display == "none"){
+      modal.style.display = "block";
+    }else{
+      modal.style.display = "none";
+    }
+  }
+
+</script>
