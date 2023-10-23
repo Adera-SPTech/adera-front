@@ -163,7 +163,9 @@ main{
 }
 .content{
     background-color: white;
-    margin: 2rem;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
     border-radius: 2rem;
 }
 .contentMacro{
@@ -171,7 +173,9 @@ main{
     flex-direction: column;
     height: calc(fit-content + 4rem);
     background-color: white;
-    margin: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
     border-radius: 2rem;
 }
 .kpis{
