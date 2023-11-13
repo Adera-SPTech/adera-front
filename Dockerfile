@@ -1,5 +1,5 @@
 FROM node:latest
-COPY ../adera-front/ /
+COPY ./ /
 RUN npm i
 RUN npm install nodemon
 ENTRYPOINT ["npm","run","dev"]
