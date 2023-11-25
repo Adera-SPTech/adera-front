@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../colors.css">
+  <link rel="stylesheet" href="../sidebar/style.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Usuários</title>
+</head>
+<body>
+  <!-- Sidebar start -->
+  <div class="sidebar" id="sidebar">
+    <ul class="sidebar-group">
+      <li>
+        <a href="#" id="hamburguer-btn">
+          <img src="../../assets/bars-solid.svg" alt="Hamburguer button" />
+        </a>
+      </li>
+      <li>
+        <a href="../home/index.html">
+          <img src="../../assets/house-solid.svg" alt="Home" />
+          <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a href="../params/index.html">
+          <img src="../../assets/sliders-solid.svg" alt="Params" />
+          <span>Parametrizações</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img src="../../assets/user-group-solid.svg" alt="Users" />
+          <span>Usuários</span>
+        </a>
+      </li>
+      <li>
+        <a href="../avisos/index.html">
+          <img
+            src="../../assets/triangle-exclamation-solid.svg"
+            alt="Warnings"
+          />
+          <span>Avisos</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="sidebar-group">
+      <li>
+        <a href="">
+          <img
+            src="../../assets/arrow-right-from-bracket-solid.svg"
+            alt="Log out"
+          />
+          <span>Sair</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- Sidebar end  -->
+  <main>
+    <div class="content">
+      <h1>Usuários</h1>
+      <div>
+        <button id="add-user-btn">Adicionar Usuário</button>
+      </div>
+      <table class="user-list">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <div class="modals-wrapper" id="modals-wrapper">
+    <div class="modal" id="add-user">
+      <h1>Adicionar usuário</h1>
+      <img src="../../assets/xmark-solid.svg" alt="Close Icon" width="24" style="position: absolute; right: 1rem; top: 1rem; cursor: pointer;" onclick="toggleModal('add-user')">
+      <div class="labeled-input">
+        <label for="name">Nome</label>
+        <input type="text" id="nameOnCreate" name="name">
+      </div>
+      <div class="labeled-input">
+        <label for="lastname">Sobrenome</label>
+        <input type="text" id="lastnameOnCreate" name="lastname">
+      </div>
+      <div class="labeled-input">
+        <label for="email">E-mail</label>
+        <input type="email" id="emailOnCreate" name="email">
+      </div>
+      <div class="labeled-input">
+        <label for="pass">Senha</label>
+        <input type="password" id="passwordOnCreate" name="pass">
+      </div>
+      <div class="labeled-input">
+        <label for="role">Cargo</label>
+        <select name="role" id="roleOnCreate">
+          <option value="0"></option>
+          <option value="1">Gerente</option>
+          <option value="2">Técnico</option>
+        </select>
+      </div>
+      <button id="add-user-button" onclick="addUser()">Salvar</button>
+    </div>
+    <div class="modal" id="edit-user">
+      <h1>Editar usuário</h1>
+      <img src="../../assets/xmark-solid.svg" alt="Close Icon" width="24" style="position: absolute; right: 1rem; top: 1rem; cursor: pointer;" onclick="toggleModal('edit-user')">
+      <div class="labeled-input">
+        <label for="name">Nome</label>
+        <input type="text" id="nameOnUpdate" name="name">
+      </div>
+      <div class="labeled-input">
+        <label for="lastname">Sobrenome</label>
+        <input type="text" id="lastnameOnUpdate" name="lastname">
+      </div>
+      <div class="labeled-input">
+        <label for="email">E-mail</label>
+        <input type="email" id="emailOnUpdate" name="email">
+      </div>
+      <div class="labeled-input">
+        <label for="pass">Senha</label>
+        <input type="password" id="passwordOnUpdate" name="pass">
+      </div>
+      <div class="labeled-input">
+        <label for="role">Cargo</label>
+        <select name="role" id="roleOnUpdate">
+          <option value="0"></option>
+          <option value="Gerente">Gerente</option>
+          <option value="Tecnico">Técnico</option>
+        </select>
+      </div>
+      <button id="add-user-button" onclick="updateUser()">Salvar</button>
+    </div>
+    <div class="modal" id="delete-user">
+      <h1>Excluir usuário?</h1>
+      <img src="../../assets/xmark-solid.svg" alt="Close Icon" width="24" style="position: absolute; right: 1rem; top: 1rem; cursor: pointer;" onclick="toggleModal('edit-user')">
+      <div style="display: flex; flex-direction: row; width: 100%; gap: 1rem; margin-top: 1rem;">
+        <button onclick="deleteUser()" style="margin: 0; flex: 1; background-color: #e74c3c;">Confirmar</button>
+        <button onclick="toggleModal('delete-user')" style="margin: 0; flex: 1; background-color: #2ecc71;">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  <script src="../sidebar/script.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

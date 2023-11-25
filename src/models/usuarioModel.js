@@ -12,7 +12,25 @@ function cadastrar(usuario, idEstabelecimento) {
   return database.executar(query)
 }
 
+function getByEstablishmentId(idEstabelecimento) {
+  var query = `SELECT * FROM usuario WHERE fkEstabelecimento = '${idEstabelecimento}' ORDER BY usuario.nome`
+  return database.executar(query)
+}
+
+function atualizar(user) {
+  var query = `UPDATE usuario SET nome = '${user.nome}', sobrenome = '${user.sobrenome}', email = '${user.email}', senha = '${user.senha}', cargo = '${user.cargo}' WHERE id = '${user.id}'`
+  return database.executar(query)
+}
+
+function deleteById(userId) {
+  var query = `DELETE FROM usuario WHERE id = '${userId}'`
+  return database.executar(query)
+}
+
 module.exports = {
   autenticar,
-  cadastrar
+  cadastrar,
+  getByEstablishmentId,
+  atualizar,
+  deleteById
 }

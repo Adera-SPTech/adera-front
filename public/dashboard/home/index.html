@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../colors.css">
+    <link rel="stylesheet" href="../sidebar/style.css" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Dashboard Adera</title>
+  </head>
+  <body>
+    <!-- Sidebar start -->
+    <div class="sidebar" id="sidebar">
+      <ul class="sidebar-group">
+        <li>
+          <a href="#" id="hamburguer-btn">
+            <img src="../../assets/bars-solid.svg" alt="Hamburguer button" />
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <img src="../../assets/house-solid.svg" alt="Home" />
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <img src="../../assets/sliders-solid.svg" alt="Params" />
+            <span>Parametrizações</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <img src="../../assets/user-group-solid.svg" alt="Users" />
+            <span>Usuários</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <img
+              src="../../assets/triangle-exclamation-solid.svg"
+              alt="Warnings"
+            />
+            <span>Avisos</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="sidebar-group">
+        <li>
+          <a href="">
+            <img
+              src="../../assets/arrow-right-from-bracket-solid.svg"
+              alt="Log out"
+            />
+            <span>Sair</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Sidebar end  -->
+    <div class="main">
+      <div class="status-bar">
+        <div class="status-info"><span>00:00</span> <span>Olá, Renan.</span></div>
+      </div>
+      <div class="content">
+        <div class="machines" id="machines-container">
+          <div class="machine">
+            <div class="machine-row">
+              <span class="title">Máquina 1</span>
+              <span class="online">online</span>
+              <span class="disk">Uso do disco: 69%</span>
+            </div>
+            <div class="machine-row">
+              <button class="machine-btn">Ir para a máquina</button>
+            </div>
+          </div>
+        </div>
+        <div class="main-dashboard">
+          <div class="kpi">
+            <span class="kpi-title">Ultima máquina a apresentar problemas na ultima semana</span>
+            <div id="last-problem"></div>
+          </div>
+          <div class="grafico">
+            <canvas id="grafico1"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../sidebar/script.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
