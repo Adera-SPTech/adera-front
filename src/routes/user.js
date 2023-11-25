@@ -12,4 +12,16 @@ router.post("/autenticar", (req, res) => {
     usuarioController.autenticar(req, res);
 });
 
+router.get("/:establishmentId", (req, res) => {
+  usuarioController.getByEstablishmentId(req, res);
+})
+
+router.delete('/:userId', (req, res) => {
+  usuarioController.deleteById(req, res);
+})
+
+router.put('', (req, res) => {
+  usuarioController.atualizar(req, res)
+})
+
 module.exports = router;
