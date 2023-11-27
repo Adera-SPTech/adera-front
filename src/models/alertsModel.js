@@ -50,7 +50,42 @@ WHERE
   return database.executar(query)
 }
 
+function getAlertListWithFilters(ecId, start, end, level, machineId) {
+  var whereClause = `WHERE e.id = '${ecId}'`;
+
+  // Add conditions based on other parameters
+  if (start !== '') {
+    whereClause += ` AND a.data >= CONVERT(DATETIMEOFFSET, '${start}') AT TIME ZONE 'UTC' AT TIME ZONE 'E. South America Standard Time'`;
+  }
+
+  if (end !== '') {
+    whereClause += ` AND a.data <= CONVERT(DATETIMEOFFSET, '${end}') AT TIME ZONE 'UTC' AT TIME ZONE 'E. South America Standard Time'`;
+  }
+
+  if (level !== '') {
+    whereClause += ` AND a.nivel = '${level}'`;
+  }
+
+  if (machineId !== '') {
+    whereClause += ` AND ma.id = '${machineId}'`;
+  }
+
+  // Construct the full query
+  var query = `
+    SELECT TOP 100 nomeMaquina, a.nivel, a.data, a.descricao
+    FROM alerta a 
+      JOIN metrica me ON a.fkMetrica = me.id
+      JOIN maquinacomponente mc ON me.fkMaquinaComponente = mc.id
+      JOIN maquina ma ON mc.fkMaquina = ma.id
+      JOIN estabelecimento e ON ma.fkEstabelecimento = e.id
+    ${whereClause} ORDER BY a.data DESC;
+  `;
+
+  return database.executar(query)
+}
+
 module.exports = {
   getAlertsByEstablishmentId,
   getAlertsByMachineId,
+  getAlertListWithFilters
 }

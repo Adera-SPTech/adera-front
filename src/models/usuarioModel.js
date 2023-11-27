@@ -8,7 +8,7 @@ function autenticar(email, senha) {
 }
 
 function cadastrar(usuario, idEstabelecimento) {
-  var query = `INSERT INTO usuario VALUES ('${usuario.id}', '${usuario.email}', '${usuario.senha}', '${usuario.nome}', '${usuario.sobrenome}', '${usuario.cargo}', '${usuario.idEstabelecimento}');`
+  var query = `INSERT INTO usuario VALUES ('${usuario.id}', '${usuario.email}', '${usuario.senha}', '${usuario.nome}', '${usuario.sobrenome}', '${usuario.cargo}', '${idEstabelecimento}');`
   return database.executar(query)
 }
 
