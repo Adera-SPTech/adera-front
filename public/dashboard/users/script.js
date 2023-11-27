@@ -1,7 +1,7 @@
 
 let users = [];
 let selectedUserIndex = null;
-var selectedUserId = null;'''''1
+var selectedUserId = null;
 
 document.getElementById('add-user-btn').addEventListener('click', e => toggleModal('add-user'))
 

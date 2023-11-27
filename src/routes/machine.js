@@ -12,4 +12,8 @@ router.get("/problem/:establishmentId", (req, res) => {
   machineController.getLastProblemByEstablishmentId(req, res);
 })
 
+router.get("/metrics/:machineId", (req, res) => {
+  machineController.getMetricsByMachineId(req, res);
+})
+
 module.exports = router;
