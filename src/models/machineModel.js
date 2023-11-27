@@ -19,6 +19,7 @@ function getMetricsByMachineId(machineId) {
   mc.id AS MaquinaComponenteID,
   mc.modelo AS ModeloMaquina,
   mc.descricao AS DescricaoMaquina,
+  tc.nome as tipo,
   met.id AS MetricaID,
   met.medicao AS MedicaoMetrica,
   met.data AS DataMetrica
@@ -26,6 +27,7 @@ FROM
   maquina m
 JOIN
   maquinacomponente mc ON m.id = mc.fkMaquina
+JOIN tipocomponente tc on tc.id = mc.fkTipoComponente
 JOIN
   metrica met ON mc.id = met.fkMaquinaComponente
 WHERE
