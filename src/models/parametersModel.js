@@ -1,22 +1,24 @@
 
 var database = require('../database/config')
 
-function putParameters(body, establishmentId) {
+function putParameters(autoRestart, restartPeriodico, restartTime, cpuAttention, cpuLimit, memoryAttention, memoryLimit, diskAttention, diskLimit, latencyAttention, latencyLimit,  establishmentId) {
+  console.log("AAAAAA")
   var query = `UPDATE opcoes
   SET
-      autoRestart = ${body.autoRestart},
-      restartPeriodico = ${body.restartPeriodico},
-      horaRestart = '${body.horaRestart}',
-      cpuAtencao =  ${body.cpuAtencao},
-      ramAtencao =  ${body.ramAtencao},
-      diskAtencao =  ${body.diskAtencao},
-      latencyAtencao =${body.latencyAtencao},
-      cpuLimite =  ${body.cpuLimite},
-      ramLimite =  ${body.ramLimite},
-      diskLimite =  ${body.diskLimite},
-      latencyLimite = ${$body.latencyLimite}
+      autoRestart = ${Number(autoRestart)},
+      restartPeriodico = ${Number(restartPeriodico)},
+      horaRestart = '${restartTime}',
+      cpuAtencao =  ${cpuAttention},
+      ramAtencao =  ${memoryAttention},
+      diskAtencao =  ${diskAttention},
+      latencyAtencao = ${latencyAttention},
+      cpuLimite =  ${cpuLimit},
+      ramLimite =  ${memoryLimit},
+      diskLimite =  ${diskLimit},
+      latencyLimite = ${latencyLimit}
   WHERE
-      fkEstabelecimento = '${establishmentId}';`
+      fkEstabelecimento = '${establishmentId}';
+`;
 
   return database.executar(query);
 }

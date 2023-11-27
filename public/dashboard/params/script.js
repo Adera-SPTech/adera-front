@@ -71,8 +71,8 @@ async function getParameters() {
   }
   var horaFormatada = horas + ':' + minutos;
 
-  document.getElementById("allowAutoRestart").value = params.autoRestart;
-  document.getElementById("allowPeriodicalRestart").value = params.restartPeriodico;
+  document.getElementById("allowAutoRestart").checked = params.autoRestart;
+  document.getElementById("allowPeriodicalRestart").checked = params.restartPeriodico;
   document.getElementById("restartTime").value = horaFormatada;
   document.getElementById("cpu-attention").value = params.cpuAtencao;
   document.getElementById("cpu-limit").value = params.cpuLimite;
@@ -91,22 +91,28 @@ async function getParameters() {
 
   console.log(params);
 }
+document.getElementById("restartTime").addEventListener('onchange' , (e) => console.log(e.target.value))
 
 async function putParameters() {
   var establishmentId = sessionStorage.establishmentId;
+  console.log(document.getElementById("restartTime").value)
+  var data = new Date(document.getElementById("restartTime").value)
+
   var update = {
-  autoRestart:  document.getElementById("allowAutoRestart").checked ,
-  restartPeriodico:  document.getElementById("allowPeriodicalRestart").checked ,
-  restartTime : document.getElementById("restartTime").value ,
-  cpuAttention : document.getElementById("cpu-attention").value ,
-  cpuLimit : document.getElementById("cpu-limit").value ,
-  memoryAttention : document.getElementById("memory-attention").value ,
-  memoryLimit : document.getElementById("memory-limit").value ,
-  diskAttention : document.getElementById("disk-attention").value ,
-  diskLimit : document.getElementById("disk-limit").value ,
-  latencyAttention : document.getElementById("latency-attention").value ,
-  latencyLimit : document.getElementById("latency-limit").value 
+  autoRestart : document.getElementById("allowAutoRestart").checked,
+  restartPeriodico : document.getElementById("allowPeriodicalRestart").checked,
+  restartTime :  `${document.getElementById("restartTime").value}:00`,
+  cpuAttention : document.getElementById("cpu-attention").value,
+  cpuLimit : document.getElementById("cpu-limit").value,
+  memoryAttention : document.getElementById("memory-attention").value,
+  memoryLimit : document.getElementById("memory-limit").value,
+  diskAttention : document.getElementById("disk-attention").value,
+  diskLimit : document.getElementById("disk-limit").value,
+  latencyAttention : document.getElementById("latency-attention").value,
+  latencyLimit : document.getElementById("latency-limit").value
   }
+
+  console.log(update)
 
   const params = await fetch(`/parameters/${establishmentId}`, {
     method: "PUT",
