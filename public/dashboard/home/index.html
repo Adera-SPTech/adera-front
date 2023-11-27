@@ -48,7 +48,7 @@
       </ul>
       <ul class="sidebar-group">
         <li>
-          <a href="">
+          <a href="" onclick="logOut()">
             <img
               src="../../assets/arrow-right-from-bracket-solid.svg"
               alt="Log out"
@@ -61,22 +61,10 @@
     <!-- Sidebar end  -->
     <div class="main">
       <div class="status-bar">
-        <div class="status-info"><span id="relogio">00:00</span> <span id="nome-empresa">Carrefour</span></div>
+        <div class="status-info"><span id="relogio">00:00</span> <span id="nome-empresa"></span></div>
       </div>
       <div class="content">
-        <div class="machines" id="machines-container">
-          <!-- <div class="machine">
-            <div class="machine-row">
-              <span class="title">Máquina 1</span>
-              <span class="online">online</span>
-              <span class="disk">Uso do disco: 69%</span>
-            </div>
-            <div class="machine-row">
-              <button class="machine-btn">Ir para a máquina</button>
-            </div>
-          </div> -->
-        </div>
-        <div class="main-dashboard">
+        <div class="main-dashboard" id="main-dashboard">
           <div class="kpi">
             <span class="kpi-title">Resumo das maquinas (online / total)</span>
             <div>
@@ -84,15 +72,16 @@
             </div>
           </div>
           <div class="kpi">
-            <span class="kpi-title">Ultima máquina a apresentar problemas na ultima semana</span>
+            <span class="kpi-title">Ultima máquina com problemas</span>
             <div id="last-problem"></div>
           </div>
-          <div class="kpi">
-            <span class="kpi-title">Selecione uma máquina para mais detalhes</span>
-          </div>
+        </div>
+        <div class="machines" id="machines-container">
+          
         </div>
       </div>
     </div>
+    <a href="../micro/index.html"></a>
     <script src="../sidebar/script.js"></script>
     <script src="./script.js"></script>
   </body>

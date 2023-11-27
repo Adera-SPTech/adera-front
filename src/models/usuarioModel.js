@@ -3,7 +3,9 @@
 var database = require('../database/config')
 
 function autenticar(email, senha) {
-  var query = `SELECT * FROM usuario WHERE email = '${email}' AND senha = '${senha}';`
+  var query = `SELECT estabelecimento.id, estabelecimento.nome, usuario.email, usuario.senha FROM usuario
+  JOIN estabelecimento on usuario.fkEstabelecimento = estabelecimento.id
+  WHERE email = '${email}' AND senha = '${senha}';`
   return database.executar(query)
 }
 

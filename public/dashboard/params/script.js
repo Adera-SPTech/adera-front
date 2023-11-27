@@ -1,3 +1,15 @@
+document.getElementById("nome-empresa").innerHTML = sessionStorage.establishmentName;
+var dataAtual = new Date();
+var horas = dataAtual.getHours();
+var minutos = dataAtual.getMinutes();
+if (horas < 10) {
+    horas = '0' + horas;
+}
+if (minutos < 10) {
+    minutos = '0' + minutos;
+}
+document.getElementById("relogio").innerHTML = horas + ':' + minutos;
+
 document.getElementById('cpu-attention').addEventListener('input', function() {
   var value = this.value;
   document.getElementById('cpu-attention-value').innerText = value.padStart(2, '0') + '%'

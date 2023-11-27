@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard Adera</title>
   </head>
-  <body>
+  <body onload="getMetrics()">
     <!-- Sidebar start -->
     <div class="sidebar" id="sidebar">
       <ul class="sidebar-group">
@@ -48,7 +48,7 @@
       </ul>
       <ul class="sidebar-group">
         <li>
-          <a href="">
+          <a href="" onclick="logOut()">
             <img
               src="../../assets/arrow-right-from-bracket-solid.svg"
               alt="Log out"
@@ -61,7 +61,7 @@
     <!-- Sidebar end  -->
     <div class="main">
       <div class="status-bar">
-        <div class="status-info"><span>00:00</span> <span>Olá, Renan.</span></div>
+        <div class="status-info"><span id="relogio">00:00</span> <span id="nome-empresa"></span></div>
       </div>
       <div class="content">
         <div class="machines" id="machines-container">
