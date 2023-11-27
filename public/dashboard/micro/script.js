@@ -1,4 +1,4 @@
-var hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+var hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 
 document.getElementById("nome-empresa").innerHTML = sessionStorage.establishmentName;
 var dataAtual = new Date();
@@ -17,6 +17,8 @@ async function getMetrics() {
   const urlParams = new URLSearchParams(myKeyValues);
   
   var options = {
+    maintainAspectRatio: false,
+    responsive: true,
     scales: {
       y: {
         beginAtZero: true,
@@ -52,7 +54,7 @@ async function getMetrics() {
   var chartDisk24 = createGrafico(document.getElementById('graficoDisk24'), {
     labels: dataDisk24.entries,
     datasets: [{
-      label: 'Média do uso nas ultimas 24 horas',
+      label: 'Média do uso do disco nas ultimas 24 horas',
       data: dataDisk24
     }]
   }, options);
@@ -72,12 +74,21 @@ async function getMetrics() {
       data: dataLatency24
     }]
   }, {
+    maintainAspectRatio: false, // Do not maintain aspect ratio
+    responsive: true,
     scales: {
       y: {
         beginAtZero: true
       }
     }
   });
+
+
+
+
+
+  const metricaUltimaHora = await fetch(`/machine/last-metrics/${machineId}`).then(res => res.json())
+
 }
   
 
@@ -124,4 +135,7 @@ function calculateHourlyAverages(data) {
   }
 
   return averages;
+}
+
+function calculateHourAverages(data) {
 }
