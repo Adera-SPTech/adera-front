@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <title>Configurações</title>
 </head>
-  <body>
+  <body onload="getParameters()">
     <!-- Sidebar start -->
     <div class="sidebar" id="sidebar">
       <ul class="sidebar-group">
@@ -73,19 +73,19 @@
             <div class="cfg-row">
               <label for="flexSwitchCheckDefault">Permitir auto-reiniciar maquinas</label>
               <div class="form-check-inline form-switch" style="width: fit-content;">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <input class="form-check-input" type="checkbox" role="switch" id="allowAutoRestart">
               </div>
             </div>
             <div class="cfg-row" >
               <label for="flexSwitchCheckDefault">Ativar reinicio periodico</label>
               <div class="form-check-inline form-switch " style="width: fit-content;">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <input class="form-check-input" type="checkbox" role="switch" id="allowPeriodicalRestart">
               </div>
             </div>
             <div class="cfg-row" style="flex-direction: column;">
               <div class="input-wrapper">
                 <label for="time">Definir horário para reiniciar</label>
-                <input type="time" name="time">
+                <input type="time" name="time" id="restartTime">
               </div>
             </div>
           </div>
@@ -140,6 +140,7 @@
             </div>
           </div>
         </div>
+        <button onclick="putParameters()">Atualizar Parâmetros</button>
       </div>
     </div>
     <script src="../sidebar/script.js"></script>

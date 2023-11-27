@@ -1,7 +1,10 @@
 const model = require('../models/parametersModel');
 
 function putParameters(req, res) {
-  model.putParameters(req.params.establishmentId)
+  var body = req.body
+  var establishmentId = req.params.establishmentId
+
+  model.putParameters(body, establishmentId)
     .then(result => {
       res.json(result[0])
     })
@@ -9,9 +12,9 @@ function putParameters(req, res) {
 
 
 function getParameters(req, res) {
-  model.getAlertsByEstablishmentId(req.params.establishmentId)
+  model.getParameters(req.params.establishmentId)
     .then(result => {
-      res.json(result)
+      res.json(result[0])
     })
 }
 
