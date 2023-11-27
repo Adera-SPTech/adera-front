@@ -15,7 +15,19 @@ function getAlertsByMachineId(req, res) {
     })
 }
 
+function getAlertListWithFilters(req, res) {
+  var ecId = req.params.establishmentId;
+  var startDate = req.query.startDate;
+  var endDate = req.query.endDate;
+  var level = req.query.level;
+  var machineId = req.query.machineId;
+
+  model.getAlertListWithFilters(ecId, startDate, endDate, level, machineId)
+    .then(result => res.json(result))
+}
+
 module.exports = {
   getAlertsByEstablishmentId,
-  getAlertsByMachineId
+  getAlertsByMachineId,
+  getAlertListWithFilters
 }

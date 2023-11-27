@@ -1,23 +1,34 @@
+document.getElementById("nome-empresa").innerHTML = sessionStorage.establishmentName;
+var dataAtual = new Date();
+var horas = dataAtual.getHours();
+var minutos = dataAtual.getMinutes();
+if (horas < 10) {
+    horas = '0' + horas;
+}
+if (minutos < 10) {
+    minutos = '0' + minutos;
+}
+document.getElementById("relogio").innerHTML = horas + ':' + minutos;
+
 async function getLastProblem() {
   var res = await fetch(`/machine/problem/${sessionStorage.getItem('establishmentId')}`).then(result => result.json())
 
   var container = document.getElementById('last-problem')
 
-  if(res != null) {
+  if(res.machine_name != undefined) {
     container.innerHTML = `
-      <span>${res.machineName}</span>
-      <button></button>
+      <span style="font-size: 32px;">${res.machine_name}</span> <br>
+      <button class="machine-btn" style="padding: .5rem 1rem" onclick="selectMachine('${res.machine_id}')">Detalhes</button>
     `
 
   } else {
-    container.innerHtml = `
-    <span>Nenhum Problema encontrado!</span>
+    container.innerHTML = `
+    <span style="font-size: 32px">Nenhum Problema encontrado!</span>
     `
   }
 }
 
 async function getMachines() {
-  document.getElementById('machines-container').innerHTML = ''
   var establishmentId = sessionStorage.getItem('establishmentId')
 
   const machines = await fetch(`/machine/${establishmentId}`, {
@@ -29,20 +40,13 @@ async function getMachines() {
 
   console.log(machines)
 
+  document.getElementById('machines-container').innerHTML = ''
   machines.forEach(renderMachine)
-}
 
-async function getUnreadAlerts() {
-  var establishmentId = sessionStorage.getItem('establishmentId')
+  var online = machines.filter(machine => machine.isOnline).length
+  document.getElementById('maquinas-online').innerText = online
+  document.getElementById('maquinas-total').innerText = machines.length
 
-  const alerts = await fetch(`/alerts/${establishmentId}`, {
-    method: 'GET',
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(res => res.json())
-
-  console.log(alerts)
 }
 
 function renderMachine(machine, index) {
@@ -51,49 +55,21 @@ function renderMachine(machine, index) {
   container.innerHTML += `
     <div class="machine">
     <div class="machine-row">
-      <span class="title">${machine.machineName}</span>
+      <span class="title">${machine.nomeMaquina}</span>
       <span class="online">${machine.isOnline ? 'online' : 'offline'}</span>
-      <span class="disk">Uso do disco: ${machine.diskUsage}</span>
+      <span class="disk">Alertas última hora: ${machine.LastHourAlertCount}</span>
     </div>
     <div class="machine-row">
-      <button class="machine-btn">Ir para a máquina</button>
+      <button class="machine-btn" onclick="selectMachine('${machine.maquina_id}')">Ir para a máquina</button>
     </div>
   </div>
   `
 }
 
-function criarGrafico(ctx, options, dados) {
-  var g = new Chart(ctx, options);
-
-  g.data.labels = dados.map(d => d.label.toString())
-  g.data.datasets[0].data = dados.map(d => d.dado)
-  g.update()
-
-  // Atribui uma função para atualizar o grafico com dados mais recentes
-  g.updateDados = function(dados) {
-    this.data.labels = dados.map(d => d.label.toString())
-    this.data.datasets[0].data = dados.map(d => d.dado)
-    this.update()
-  }
-
-  return g
+function selectMachine(id) {
+  console.log(id)
+  window.location.href = `../micro/index.html?id=${id}`
 }
-
-const g1 = criarGrafico(document.getElementById('grafico1'), {
-  type: 'bar',
-  data: {
-    labels: [],
-    datasets: [{
-      label: 'vezes favoritada',
-      data: [],
-      backgroundColor: [
-        '#00ADB5',
-        '#AC7DD2'
-      ],
-      hoverOffset: 4
-    }]
-  }
-}, []);
 
 function updateScreen() {
   getMachines();
@@ -101,6 +77,7 @@ function updateScreen() {
 }
 
 getMachines()
+getLastProblem()
 
-setInterval(updateScreen, 500)
+// setInterval(updateScreen, 2000)
 

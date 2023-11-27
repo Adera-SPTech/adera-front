@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard Adera</title>
   </head>
-  <body>
+  <body onload="getMetrics()">
     <!-- Sidebar start -->
     <div class="sidebar" id="sidebar">
       <ul class="sidebar-group">
@@ -19,7 +19,7 @@
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="../home/index.html">
             <img src="../../assets/house-solid.svg" alt="Home" />
             <span>Home</span>
           </a>
@@ -48,7 +48,7 @@
       </ul>
       <ul class="sidebar-group">
         <li>
-          <a href="">
+          <a href="" onclick="logOut()">
             <img
               src="../../assets/arrow-right-from-bracket-solid.svg"
               alt="Log out"
@@ -61,28 +61,39 @@
     <!-- Sidebar end  -->
     <div class="main">
       <div class="status-bar">
-        <div class="status-info"><span>00:00</span> <span>Olá, Renan.</span></div>
+        <div class="status-info"><span id="relogio">00:00</span> <span id="nome-empresa"></span></div>
       </div>
       <div class="content">
-        <div class="machines" id="machines-container">
-          <div class="machine">
-            <div class="machine-row">
-              <span class="title">Máquina 1</span>
-              <span class="online">online</span>
-              <span class="disk">Uso do disco: 69%</span>
-            </div>
-            <div class="machine-row">
-              <button class="machine-btn">Ir para a máquina</button>
-            </div>
-          </div>
-        </div>
+        <h1>Maquina</h1>
+        <button onclick="addCommand('restart')">Reiniciar</button>
+        <button onclick="addCommand('optimize')">Otimizar</button>
+        <h2 id="nome-maquina"></h2>
         <div class="main-dashboard">
-          <div class="kpi">
-            <span class="kpi-title">Ultima máquina a apresentar problemas na ultima semana</span>
-            <div id="last-problem"></div>
-          </div>
-          <div class="grafico">
-            <canvas id="grafico1"></canvas>
+          <div class="graficos">
+            <div class="grafico-wrapper">
+              <h1 class="titulo-grafico">Média de uso nas últimas 24 horas por hora</h1>
+              <div>
+                <canvas id="graficoCpu24"></canvas>
+              </div>
+            </div>
+            <div class="grafico-wrapper">
+              <h1 class="titulo-grafico">Média de uso nas últimas 24 horas por hora</h1>
+              <div>
+                <canvas id="graficoDisk24"></canvas>
+              </div>
+            </div>
+            <div class="grafico-wrapper">
+              <h1 class="titulo-grafico">Média de uso nas últimas 24 horas por hora</h1>
+              <div>
+                <canvas id="graficoMemory24"></canvas>
+              </div>
+            </div>
+            <div class="grafico-wrapper">
+              <h1 class="titulo-grafico">Latência média por hora nas últimas 24 horas</h1>
+              <div>
+                <canvas id="graficoLatency24"></canvas>
+              </div>
+            </div>
           </div>
         </div>
       </div>

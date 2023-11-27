@@ -1,27 +1,29 @@
 
 var database = require('../database/config')
 
-function putParameters(establishmentId) {
+function putParameters(autoRestart, restartPeriodico, restartTime, cpuAttention, cpuLimit, memoryAttention, memoryLimit, diskAttention, diskLimit, latencyAttention, latencyLimit,  establishmentId) {
+  console.log("AAAAAA")
   var query = `UPDATE opcoes
   SET
-      autoRestart = ${req.body.autoRestart},
-      restartPeriodico = ${req.body.restartPeriodico},
-      horaRestart = '${req.body.horaRestart}',
-      cpuAtencao =  ${req.body.cpuAtencao},
-      ramAtencao =  ${req.body.ramAtencao},
-      diskAtencao =  ${req.body.diskAtencao},
-      latencyAtencao =${req.body.latencyAtencao},
-      cpuLimite =  ${req.body.cpuLimite},
-      ramLimite =  ${req.body.ramLimite},
-      diskLimite =  ${req.body.diskLimite},
-      latencyLimite = ${$req.body.latencyLimite}
+      autoRestart = ${Number(autoRestart)},
+      restartPeriodico = ${Number(restartPeriodico)},
+      horaRestart = '${restartTime}',
+      cpuAtencao =  ${cpuAttention},
+      ramAtencao =  ${memoryAttention},
+      diskAtencao =  ${diskAttention},
+      latencyAtencao = ${latencyAttention},
+      cpuLimite =  ${cpuLimit},
+      ramLimite =  ${memoryLimit},
+      diskLimite =  ${diskLimit},
+      latencyLimite = ${latencyLimit}
   WHERE
-      fkEstabelecimento = '${establishmentId}';`
+      fkEstabelecimento = '${establishmentId}';
+`;
 
   return database.executar(query);
 }
 
-function putParameters(establishmentId) {
+function getParameters(establishmentId) {
   var query = `SELECT
   id AS OpcoesID,
   autoRestart,
@@ -37,7 +39,7 @@ function putParameters(establishmentId) {
   latencyLimite,
   fkEstabelecimento
 FROM
-  adera.opcoes
+  opcoes
 WHERE
   fkEstabelecimento = '${establishmentId}';`
 
@@ -45,5 +47,6 @@ WHERE
 }
 
 module.exports = {
-  putParameters
+  putParameters,
+  getParameters	
 }

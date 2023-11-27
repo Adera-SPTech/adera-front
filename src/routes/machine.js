@@ -16,4 +16,8 @@ router.get("/metrics/:machineId", (req, res) => {
   machineController.getMetricsByMachineId(req, res);
 })
 
+router.get("/last-metrics/:machineId", (req, res) => {
+  machineController.lastMetrics(req, res)
+})
+
 module.exports = router;

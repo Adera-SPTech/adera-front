@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/signup.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <title>Cadastro</title>
+</head>
+<body>
+  <header>
+    <img src="./assets/logotipo.png" alt="Adera Logo" style="height: 6rem;">
+  </header>
+  <main>
+    <form class="form-login" id="form-login">
+        <h1>Cadastro</h1>
+      <h2>Para começar, precisamos do nome da sua empresa e do CNPJ</h2>
+      <span class="errorMsg" id="error-msg">&nbsp;</span>
+      <div class="labeled-input">
+        <div>
+          <i class="bi bi-at"></i>
+        </div>
+        <input type="text" name="nome" id="input-nome" placeholder="Nome" required>
+      </div>
+      <div class="labeled-input">
+        <div>
+          <i class="bi bi-bank"></i>
+        </div>
+        <input type="text" name="cnpj" id="input-cnpj" placeholder="CNPJ" required>
+      </div>
+      <div class="labeled-input">
+
+        <button type="submit">Prosseguir</button>
+      </div>
+    </form>
+
+    <form style="display: none;" class="form-login" id="form-login">
+      <span>
+        <i onclick="modalDisplay(1,0)" class="bi bi-caret-left"></i>
+        <h1>Cadastro</h1>
+      </span>
+      <div class="labeled-input">
+        <div>
+          <i class="bi bi-card-heading"></i>
+        </div>
+        <input type="text" name="logradouro" id="input-logra" placeholder="Logradouro" required>
+      </div>
+      <div class="labeled-input">
+        <div>
+          <i class="bi bi-buildings"></i>
+        </div>
+        <input type="text" name="estado" id="input-estado" placeholder="Estado" required>
+      </div>
+      <div class="labeled-input">
+        <div>
+          <i class="bi bi-building"></i>
+        </div>
+        <input type="text" name=" cidade" id="input-cidade" placeholder="Cidade" required>
+      </div>
+        <span>
+
+          <div class="labeled-input">
+            <div>
+              <i class="bi bi-houses"></i>
+        </div>
+        <input type="text" name="bairro" id="input-bairro" placeholder="Bairro" required>
+      </div>
+      <div class="labeled-input">
+
+        <div>
+          <i class="bi bi-signpost"></i>
+        </div>
+        <input type="number" name="CEP" id="input-cep" placeholder="CEP" required>
+      </div>
+        </span>
+        <span>
+
+          <div class="labeled-input">
+            <div>
+              <i class="bi bi-123"></i>
+            </div>
+            <input type="text" name="Numero" id="input-numero" placeholder="Número" required>
+          </div>
+          <div class="labeled-input">
+            <div>
+              <i class="bi bi-blockquote-left"></i>
+            </div>
+            <input type="text" name="Complemento" id="input-complemento" placeholder="Complemento" required>
+          </div>  
+        </span>
+        <button type="submit">Prosseguir</button>
+    </form>
+
+    <form style="display: none;" class="form-login" id="form-login">
+      <span>
+        <i onclick="modalDisplay(2,1)" class="bi bi-caret-left"></i>
+        <h1>Cadastro</h1>
+      </span>
+      <div class="labeled-input">
+        <div>
+          <i class="bi bi-card-heading"></i>
+        </div>
+        <input type="text" name="email" id="input-email" placeholder="E-mail" required>
+      </div>
+      <div class="labeled-input">
+        <div>
+          <i class="bi bi-buildings"></i>
+        </div>
+        <input type="text" name="senha" id="input-senha" placeholder="Senha" required>
+      </div>
+      <div class="labeled-input">
+        <div>
+          <i class="bi bi-building"></i>
+        </div>
+        <input type="text" name="csenha" id="input-csenha" placeholder="Confirmar Senha" required>
+      </div>
+      <button type="submit" >Prosseguir</button>
+    </form>
+  </main>
+  <script>
+    var elms = document.querySelectorAll("#form-login");
+    document.querySelectorAll("#form-login")[0].addEventListener("submit", e => {
+      e.preventDefault();
+      modalDisplay(0,1)
+    });
+    document.querySelectorAll("#form-login")[1].addEventListener("submit", e => {
+      e.preventDefault();
+      modalDisplay(1,2)
+    });
+    document.querySelectorAll("#form-login")[2].addEventListener("submit", e => {
+      e.preventDefault();
+      if(document.getElementById("input-senha").value != document.getElementById("input-csenha").value){
+        alert("As senhas não coincidem");
+        return;
+      }
+      fetch('/usuario/cadastrarempresa', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        nome: document.getElementById("input-nome").value,
+        cnpj: document.getElementById("input-cnpj").value,
+        logradouro: document.getElementById("input-logra").value,
+        estado: document.getElementById("input-estado").value,
+        cidade: document.getElementById("input-cidade").value,
+        bairro: document.getElementById("input-bairro").value,
+        cep: document.getElementById("input-cep").value,
+        numero: document.getElementById("input-numero").value,
+        complemento: document.getElementById("input-complemento").value,
+        email: document.getElementById("input-email").value,
+        senha: document.getElementById("input-senha").value
+    })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch((error) => {
+    console.error('Error:', error);
+}); 
+    }
+    );
+
+
+
+
+function modalDisplay(a,b){
+
+  var x = document.getElementsByTagName("form");
+  console.log(x[a]);
+  if(a == 0 && b == 1){
+    if(document.getElementById("input-nome").value == "" || document.getElementById("input-cnpj").value == ""){
+      alert("Preencha todos os campos");
+      return;
+    }
+  } else if(a == 1 && b == 2){
+    if(document.getElementById("input-logra").value == "" || document.getElementById("input-estado").value == "" || document.getElementById("input-cidade").value == "" || document.getElementById("input-bairro").value == "" || document.getElementById("input-cep").value == "" || document.getElementById("input-numero").value == "" || document.getElementById("input-complemento").value == ""){
+      alert("Preencha todos os campos");
+      return;
+    }
+  } else if(a == 2 && b == 1){
+    if(document.getElementById("input-email").value == "" || document.getElementById("input-senha").value == "" || document.getElementById("input-csenha").value == ""){
+      alert("Preencha todos os campos");
+      return;
+    }
+  }
+  x[a].style.display = "none";
+  x[b].style.display = "flex";
+}
+  
+  </script>
+</body>
+</html>

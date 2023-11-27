@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../colors.css">
+  <link rel="stylesheet" href="../sidebar/style.css">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <title>Alertas</title>
+</head>
+<body>
+  <!-- Sidebar start -->
+  <div class="sidebar" id="sidebar" style="position: fixed; z-index: 1;">
+    <ul class="sidebar-group">
+      <li>
+        <a href="#" id="hamburguer-btn">
+          <img src="../../assets/bars-solid.svg" alt="Hamburguer button" />
+        </a>
+      </li>
+      <li>
+        <a href="../home/index.html">
+          <img src="../../assets/house-solid.svg" alt="Home" />
+          <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a href="../params/index.html">
+          <img src="../../assets/sliders-solid.svg" alt="Params" />
+          <span>Parametrizações</span>
+        </a>
+      </li>
+      <li>
+        <a href="../users/index.html">
+          <img src="../../assets/user-group-solid.svg" alt="Users" />
+          <span>Usuários</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img
+            src="../../assets/triangle-exclamation-solid.svg"
+            alt="Warnings"
+          />
+          <span>Avisos</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="sidebar-group">
+      <li>
+        <a href="">
+          <img
+            src="../../assets/arrow-right-from-bracket-solid.svg"
+            alt="Log out"
+          />
+          <span>Sair</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- Sidebar end  -->
+  <div class="main" style="margin-left: 120px; z-index: 0;">
+    <div class="status-bar">
+      <div class="status-info"><span id="relogio">00:00</span> <span id="nome-empresa">Carrefour</span></div>
+    </div>
+    <div class="content">
+      <h1>Alertas</h1>
+      <div class="content-row">
+        <div class="filters">
+          <div class="labeled-input">
+            <label for="maquina">Máquina</label>
+            <select class="form-select" id="maquina" aria-label="Default select example">
+              <option selected value="">Todas</option>
+            </select>
+          </div>
+          <div class="labeled-input">
+            <label for="datetimeInput">Periodo</label>
+            <div class="datetime-input">
+              <input type="text" id="datetimeInput" placeholder="Select Date and Time" class="form-control">
+            </div>
+          </div>
+          <div class="labeled-input">
+            <label for="level">Nivel</label>
+            <select class="form-select" id="level" aria-label="Default select example">
+              <option selected value="">Todos</option>
+              <option value="Atenção">Atenção</option>
+              <option value="Crítico">Crítico</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="content-row">
+        <table class="alert-list" style="width: 100%;">
+          <thead>
+            <tr>
+              <th scope="col">Maquina</th>
+              <th scope="col">Nível</th>
+              <th scope="col">Data</th>
+              <th scope="col">Descrição</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="../sidebar/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="./script.js"></script>
+</body>
+</html>

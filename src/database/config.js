@@ -3,10 +3,10 @@ var sql = require("mssql");
 
 // CONEXÃO DO SQL SERVER - AZURE (NUVEM)
 var sqlServerConfig = {
-  server: "SEU_SERVIDOR",
-  database: "SEU_BANCO_DE_DADOS",
-  user: "SEU_USUARIO",
-  password: "SUA_SENHA",
+  server: "100.25.245.5",
+  database: "adera",
+  user: "sa",
+  password: "aderatech",
   pool: {
     max: 10,
     min: 0,
@@ -14,6 +14,7 @@ var sqlServerConfig = {
   },
   options: {
     encrypt: true, // for azure
+    trustServerCertificate: true
   },
 };
 
@@ -26,6 +27,7 @@ var mySqlConfig = {
 };
 
 function executar(instrucao) {
+  console.log(instrucao)
   // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js
   if (process.env.AMBIENTE_PROCESSO == "producao") {
     return new Promise(function (resolve, reject) {

@@ -51,31 +51,35 @@ body {
 
 .machines {
   align-self: flex-end;
-  height: 94vh;
-  background-color: var(--primary-color);
-  padding: .5rem;
-  border-radius: 10px 10px 0 0;
-  min-width: calc(250px + 16px);
-
-  overflow-y: scroll;
-  overflow-x: hidden;
+    height: 94vh;
+    background-color: var(--primary-color);
+    padding: 0.5rem;
+    border-radius: 10px 10px 0 0;
+    min-width: calc(250px + 16px);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .machines::-webkit-scrollbar { display: none;}
 
-.machine:first-child { margin: 0; }
 
 .machine {
-
-  margin-top: 10px;
-  background-color: #fefefe;
-  min-width: 250px;
-  width: fit-content;
-  border-radius: 5px;
-
-  padding: 0 10px 10px;
-
-  border-top: 10px solid;
+    background-color: #fefefe;
+    margin: 1rem;
+    width: 250px;
+    border-radius: 5px;
+    padding: 0 10px 10px;
+    border-top: 10px solid;
+    height: fit-content;
+    display: flex;
+    flex: 0 0 20%;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .status-good {}
@@ -132,12 +136,14 @@ body {
 .main-dashboard {
   background-color: var(--primary-color);
 
-  width: 100%;
+  width: fit-content;
   height: 100%;
-
   padding: 20px;
-
   border-radius: 10px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .kpi {
@@ -148,6 +154,7 @@ body {
   background-color: #fefefe;
   padding: 20px;
   width: fit-content;
+  height: fit-content;
 
   border-radius: 5px;
 }

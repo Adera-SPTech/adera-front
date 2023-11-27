@@ -11,4 +11,8 @@ router.get("/machine/:machineId", (req, res) => {
   alertsController.getAlertsByMachineId(req, res);
 })
 
+router.get("/list/:establishmentId", (req, res) => {
+  alertsController.getAlertListWithFilters(req, res);
+})
+
 module.exports = router;

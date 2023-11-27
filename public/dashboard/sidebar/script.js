@@ -5,3 +5,7 @@ sidebarBtn.addEventListener('click', (e) => {
   e.preventDefault()
   sideBar.classList.toggle('open')
 })
+
+// function logOut(){
+
+// }
