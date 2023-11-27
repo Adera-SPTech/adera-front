@@ -1,0 +1,157 @@
+body {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  width: 100vw;
+
+  overflow: hidden;
+
+  font-family: 'Montserrat', sans-serif;
+}
+
+main {
+  flex: 1;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  margin: 1rem;
+
+  flex: 1;
+}
+
+.user-list > thead {
+  text-align: left;
+}
+
+.user-list th,
+.user-list td {
+  padding: .5rem;
+}
+
+.user:nth-child(even) {
+  background-color: rgb(197, 197, 197);
+}
+.user:nth-child(odd) {
+  background-color: rgba(187, 187, 187, 0.5);
+}
+
+.user:first-child {
+  border-radius: 5px 5px 0 0;
+}
+
+.user:last-child {
+  border-radius: 0 0 5px 5px;
+}
+
+.actions {
+  margin: 0 auto;
+}
+
+.actions > img {
+  width: 1rem;
+  cursor: pointer;
+}
+
+.actions > img:nth-child(2) {
+  fill: red;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+
+  width: 500px;
+  border-radius: 15px;
+
+  padding: 2rem;
+
+  position: absolute;
+  right: -100%;
+
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: #fefefe;
+  box-shadow: 1px 1px 15px 5px rgba(0,0,0,0.25);
+
+  transition: all ease-in-out 200ms;
+}
+
+.labeled-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal input,
+.modal select {
+  outline: none;
+
+  border-bottom: 2px var(--primary-color) solid;
+  font-size: 1.5rem;
+  padding: .2rem;
+
+}
+
+.modal input:has(:focus, :active),
+.modal select:has(:focus, :active) {
+  outline: none;
+}
+
+.modal button {
+  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: var(--accent-color);
+  color: #fefefe;
+}
+
+.modal button:hover {
+  filter: brightness(.75);
+}
+
+#add-user-btn {
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: var(--accent-color);
+  color: #fefefe;
+}
+
+#add-user-btn:hover {
+  filter: brightness(.75);
+}
+
+.modal-shown {
+  right: 50%;
+  transform: translate(50%, -50%);
+  transition: all ease-in 200ms;
+}
+
+#modals-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: none;
+
+  backdrop-filter: blur(3px);
+}
+
+.modal-wrapper-shown {
+  display: block !important;
+}

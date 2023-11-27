@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../colors.css">
+    <link rel="stylesheet" href="../sidebar/style.css" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Dashboard Adera</title>
+  </head>
+  <body>
+    <!-- Sidebar start -->
+    <div class="sidebar" id="sidebar">
+      <ul class="sidebar-group">
+        <li>
+          <a href="#" id="hamburguer-btn">
+            <img src="../../assets/bars-solid.svg" alt="Hamburguer button" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="../../assets/house-solid.svg" alt="Home" />
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="../params/index.html">
+            <img src="../../assets/sliders-solid.svg" alt="Params" />
+            <span>Parametrizações</span>
+          </a>
+        </li>
+        <li>
+          <a href="../users/index.html">
+            <img src="../../assets/user-group-solid.svg" alt="Users" />
+            <span>Usuários</span>
+          </a>
+        </li>
+        <li>
+          <a href="../avisos/alertas.html">
+            <img
+              src="../../assets/triangle-exclamation-solid.svg"
+              alt="Warnings"
+            />
+            <span>Avisos</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="sidebar-group">
+        <li>
+          <a href="" onclick="logOut()">
+            <img
+              src="../../assets/arrow-right-from-bracket-solid.svg"
+              alt="Log out"
+            />
+            <span>Sair</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Sidebar end  -->
+    <div class="main">
+      <div class="status-bar">
+        <div class="status-info"><span id="relogio">00:00</span> <span id="nome-empresa"></span></div>
+      </div>
+      <div class="content">
+        <div class="main-dashboard" id="main-dashboard">
+          <div class="kpi">
+            <span class="kpi-title">Resumo das maquinas (online / total)</span>
+            <div>
+              <span id="maquinas-online" style="font-size: 64px; color: #2ecc71; margin: 0 4px;">0</span><span style="font-size: 32px;">/</span><span id="maquinas-total" style="font-size: 64px; margin: 0 4px;">0</span>
+            </div>
+          </div>
+          <div class="kpi">
+            <span class="kpi-title">Ultima máquina com problemas</span>
+            <div id="last-problem"></div>
+          </div>
+        </div>
+        <div class="machines" id="machines-container">
+          
+        </div>
+      </div>
+    </div>
+    <a href="../micro/index.html"></a>
+    <script src="../sidebar/script.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
