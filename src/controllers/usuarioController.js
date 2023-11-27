@@ -2,24 +2,48 @@ var uuid = require('uuid');
 
 var model = require('../models/usuarioModel')
 
+function cadastrarempresa(req, res) {
+  const empresa = {
+    id: uuid.v4(),
+    nome: req.body.nome,
+    cnpj: req.body.cnpj,
+    logradouro: req.body.logradouro,
+    estado: req.body.estado,
+    cidade: req.body.cidade,
+    bairro: req.body.bairro,
+    cep: req.body.cep,
+    numero: req.body.numero,
+    complemento: req.body.complemento,
+    email: req.body.email,
+    senha: req.body.senha
+  }
+
+  model.cadastrarempresa(empresa)
+    .then(result => {
+      res.status(200).json(result)
+    })
+}
+
 function cadastrar(req, res) {
   const usuario = {
     id: uuid.v4(),
-    email: req.email,
-    senha: req.senha,
-    nome: req.nome,
-    sobrenome: req.sobrenome,
-    cargo: req.cargo,
-    idEstabelecimento: req.idEstabelecimento
+    email: req.body.email,
+    senha: req.body.senha,
+    nome: req.body.nome,
+    sobrenome: req.body.sobrenome,
+    cargo: req.body.cargo,
+    idEstabelecimento: req.body.idEstabelecimento
   }
 
-  return model.cadastrar(usuario)
+  model.cadastrar(usuario)
+    .then(result => {
+      res.status(200).json(result)
+    })
 }
 
 function autenticar(req, res) {
   model.autenticar(req.body.email, req.body.senha)
     .then(result => {
-      console.log(result)
       if(result.length > 0) {
         res.json({
           id: result[0].id,
@@ -34,8 +58,32 @@ function autenticar(req, res) {
       }
     })
 }
+function getByEstablishmentId(req, res) {
+  model.getByEstablishmentId(req.params.establishmentId)
+    .then(result => {
+      res.json(result);
+    })
+}
+
+function atualizar(req, res) {
+  model.atualizar(req.body)
+    .then(result => {
+      res.json(result)
+    })
+}
+
+function deleteById(req, res) {
+  model.deleteById(req.params.userId)
+    .then(result => {
+      res.json(result)
+    })
+}
 
 module.exports = {
   cadastrar,
-  autenticar
+  autenticar,
+  getByEstablishmentId,
+  atualizar,
+  deleteById,
+  cadastrarempresa
 }
