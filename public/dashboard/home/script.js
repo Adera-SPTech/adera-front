@@ -57,7 +57,7 @@ function renderMachine(machine, index) {
     <div class="machine-row">
       <span class="title">${machine.nomeMaquina}</span>
       <span class="online">${machine.isOnline ? 'online' : 'offline'}</span>
-      <span class="disk">Uso do disco: ${machine.diskUsage}</span>
+      <span class="disk">Alertas última hora: ${machine.LastHourAlertCount}</span>
     </div>
     <div class="machine-row">
       <button class="machine-btn" onclick="selectMachine('${machine.maquina_id}')">Ir para a máquina</button>

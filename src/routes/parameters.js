@@ -4,6 +4,7 @@ var router = express.Router();
 var parametersController = require("../controllers/parametersController");
 
 router.put("/:establishmentId", (req, res) => {
+  console.log("a")
   parametersController.putParameters(req, res);
 })
 
