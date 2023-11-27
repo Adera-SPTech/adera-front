@@ -12,6 +12,7 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require('./src/routes/user');
 var machineRouter = require('./src/routes/machine')
 var alertRouter = require('./src/routes/alerts')
+var parametersRouter = require('./src/routes/parameters')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -23,6 +24,7 @@ app.use("/", indexRouter);
 app.use('/usuario', usuarioRouter)
 app.use('/machine', machineRouter)
 app.use('/alert', alertRouter)
+app.use('/parameters', parametersRouter)
 
 app.listen(PORTA, () => {
   console.log(`App rodando na porta ${PORTA}\nhttp://localhost:${PORTA}`)
