@@ -12,7 +12,13 @@ function getLastProblemByEstablishmentId(establishmentId) {
   return database.executar(query);
 }
 
+function getMetricsByMachineId(machineId) {
+  var query = `select * from metrica where fkMaquinaComponente = '${machineId}' order by data desc;`
+  return database.executar(query);
+}
+
 module.exports = {
   getMachinesByEstablishmentId,
-  getLastProblemByEstablishmentId
+  getLastProblemByEstablishmentId,
+  getMetricsByMachineId
 }

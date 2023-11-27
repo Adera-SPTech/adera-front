@@ -32,6 +32,19 @@ async function getMachines() {
   machines.forEach(renderMachine)
 }
 
+async function getUnreadAlerts() {
+  var establishmentId = sessionStorage.getItem('establishmentId')
+
+  const alerts = await fetch(`/alerts/${establishmentId}`, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(res => res.json())
+
+  console.log(alerts)
+}
+
 function renderMachine(machine, index) {
   const container = document.getElementById('machines-container')
   
