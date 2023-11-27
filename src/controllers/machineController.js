@@ -18,7 +18,7 @@ function getLastProblemByEstablishmentId(req, res) {
 function getMetricsByMachineId(req, res) {
   model.getMetricsByMachineId(req.params.machineId)
     .then(result => {
-      res.json(result[0])
+      res.json(result)
     })
 }
 

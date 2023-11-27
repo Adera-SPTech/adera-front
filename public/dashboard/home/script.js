@@ -1,3 +1,15 @@
+document.getElementById("nome-empresa").innerHTML = sessionStorage.establishmentName;
+var dataAtual = new Date();
+var horas = dataAtual.getHours();
+var minutos = dataAtual.getMinutes();
+if (horas < 10) {
+    horas = '0' + horas;
+}
+if (minutos < 10) {
+    minutos = '0' + minutos;
+}
+document.getElementById("relogio").innerHTML = horas + ':' + minutos;
+
 async function getLastProblem() {
   var res = await fetch(`/machine/problem/${sessionStorage.getItem('establishmentId')}`).then(result => result.json())
 
@@ -6,7 +18,7 @@ async function getLastProblem() {
   if(res.machine_name != undefined) {
     container.innerHTML = `
       <span style="font-size: 32px;">${res.machine_name}</span> <br>
-      <button onclick="" class="machine-btn" style="padding: .5rem 1rem">Detalhes</button>
+      <button class="machine-btn" style="padding: .5rem 1rem" onclick="selectMachine('${res.machine_id}')">Detalhes</button>
     `
 
   } else {
@@ -48,14 +60,15 @@ function renderMachine(machine, index) {
       <span class="disk">Uso do disco: ${machine.diskUsage}</span>
     </div>
     <div class="machine-row">
-      <button class="machine-btn" onclick="${(e) => selectMachine(e)}">Ir para a máquina</button>
+      <button class="machine-btn" onclick="selectMachine('${machine.maquina_id}')">Ir para a máquina</button>
     </div>
   </div>
   `
 }
 
-function selectMachine(e) {
-  console.log(e)
+function selectMachine(id) {
+  console.log(id)
+  window.location.href = `../micro/index.html?id=${id}`
 }
 
 function updateScreen() {

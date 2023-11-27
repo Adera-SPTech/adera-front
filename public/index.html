@@ -70,7 +70,8 @@
               return
             } 
 
-            sessionStorage.setItem('establishmentId', json.idEstabelecimento)
+            sessionStorage.setItem('establishmentId', json.id)
+            sessionStorage.setItem('establishmentName', json.nome)
             sessionStorage.setItem('usuario', JSON.stringify(json))
             sessionStorage.setItem('logged', true);
             btnEntrar.innerHTML = 'Entrar'
