@@ -22,8 +22,14 @@ function getMetricsByMachineId(req, res) {
     })
 }
 
+function lastMetrics(req, res) {
+  model.lastMetrics(req.params.machineId)
+    .then(result => res.json(result))
+}
+
 module.exports = {
   getMachinesByEstablishmentId,
   getLastProblemByEstablishmentId,
-  getMetricsByMachineId
+  getMetricsByMachineId,
+  lastMetrics
 }

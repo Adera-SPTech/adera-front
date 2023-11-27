@@ -88,9 +88,20 @@ async function getMetrics() {
 
 
   const metricaUltimaHora = await fetch(`/machine/last-metrics/${machineId}`).then(res => res.json())
+  console.log(metricaUltimaHora)
 
 }
   
+async function addCommand(command) {
+  const myKeyValues = window.location.search;
+  const urlParams = new URLSearchParams(myKeyValues);
+  var body = {
+    command: command,
+    machineId: urlParams.get("id")
+  }
+  await fetch(`/command`, {method: 'POST', headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)})
+}
+
 
 async function getMachine() {
   const myKeyValues = window.location.search;
