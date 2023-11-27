@@ -2,6 +2,28 @@ var uuid = require('uuid');
 
 var model = require('../models/usuarioModel')
 
+function cadastrarempresa(req, res) {
+  const empresa = {
+    id: uuid.v4(),
+    nome: req.body.nome,
+    cnpj: req.body.cnpj,
+    logradouro: req.body.logradouro,
+    estado: req.body.estado,
+    cidade: req.body.cidade,
+    bairro: req.body.bairro,
+    cep: req.body.cep,
+    numero: req.body.numero,
+    complemento: req.body.complemento,
+    email: req.body.email,
+    senha: req.body.senha
+  }
+
+  model.cadastrarempresa(empresa)
+    .then(result => {
+      res.status(200).json(result)
+    })
+}
+
 function cadastrar(req, res) {
   const usuario = {
     id: uuid.v4(),
@@ -62,5 +84,6 @@ module.exports = {
   autenticar,
   getByEstablishmentId,
   atualizar,
-  deleteById
+  deleteById,
+  cadastrarempresa
 }

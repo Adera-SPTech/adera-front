@@ -2,6 +2,19 @@
 
 var database = require('../database/config')
 
+async function cadastrarempresa(empresa) {
+  var query1 = `INSERT INTO adera.estabelecimento VALUES ('${empresa.id}', '${empresa.nome}', '${empresa.cnpj}')`;
+  var query2 = `INSERT INTO adera.endereco VALUES ('${empresa.cep}', '${empresa.logradouro}', '${empresa.numero}', '${empresa.cidade}', '${empresa.estado}', '${empresa.complemento}', '${empresa.bairro}', '${empresa.id}');`;
+  var query3 = `INSERT INTO adera.usuario VALUES ('${uuid.v4()}', '${empresa.email}', '${empresa.senha}', 'Administrador', '${empresa.nome}', 'Administrador', '${empresa.id}');`
+  const results = await Promise.all([
+    database.executar(query1),
+    database.executar(query2),
+    database.executar(query3)
+  ]);
+  return results;
+}
+
+
 function autenticar(email, senha) {
   var query = `SELECT estabelecimento.id, estabelecimento.nome, usuario.email, usuario.senha FROM usuario
   JOIN estabelecimento on usuario.fkEstabelecimento = estabelecimento.id
@@ -34,5 +47,6 @@ module.exports = {
   cadastrar,
   getByEstablishmentId,
   atualizar,
-  deleteById
+  deleteById,
+  cadastrarempresa
 }
