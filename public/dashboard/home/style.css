@@ -51,7 +51,7 @@ body {
 
 .machines {
   align-self: flex-end;
-    height: 94vh;
+    height: 100%;
     background-color: var(--primary-color);
     padding: 0.5rem;
     border-radius: 10px 10px 0 0;
@@ -63,6 +63,8 @@ body {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    gap: 1rem;
+    padding: 1rem;
 }
 
 .machines::-webkit-scrollbar { display: none;}
@@ -70,14 +72,13 @@ body {
 
 .machine {
     background-color: #fefefe;
-    margin: 1rem;
     width: 250px;
     border-radius: 5px;
     padding: 0 10px 10px;
     border-top: 10px solid;
     height: fit-content;
     display: flex;
-    flex: 0 0 20%;
+    flex: 1 1 calc(50% - 1rem);
     flex-wrap: wrap;
     flex-direction: column;
 }

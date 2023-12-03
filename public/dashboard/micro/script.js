@@ -1,5 +1,10 @@
 var hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 
+var chartCpu24;
+var chartDisk24;
+var chartMemory24;
+var chartLatency24;
+
 document.getElementById("nome-empresa").innerHTML = sessionStorage.establishmentName;
 var dataAtual = new Date();
 var horas = dataAtual.getHours();
@@ -35,43 +40,40 @@ async function getMetrics() {
       "Content-Type": "application/json"
     }
   }).then(res => res.json())
-  
-  console.log(metrics)
 
-  var dataCpu24 = calculateHourlyAverages(metrics.filter(m => m.tipo === 'CPU'))
-  console.log(dataCpu24)
+  var dataCpu24 = groupMetricsByHour(metrics.filter(m => m.tipo_componente === 'CPU'))
 
   const ctxGrafCpu24 = document.getElementById('graficoCpu24')
-  var chartCpu24 = createGrafico(ctxGrafCpu24, {
-    labels: dataCpu24.entries,
+  chartCpu24 = createGrafico(ctxGrafCpu24, {
+    labels: Array.from({length: 24}, (_, index) => index.toString() + (index == 0 || index == 1 ? " Hora atrás" : " Horas atrás")).reverse(),
     datasets: [{
-      label: 'Média do uso da CPU nas ultimas 24 horas',
-      data: dataCpu24
+      label: '% de uso',
+      data: dataCpu24.map(d => d.media)
     }]
-  }, options);
+  });
 
-  var dataDisk24 = calculateHourlyAverages(metrics.filter(m => m.tipo === 'DISK'))
-  var chartDisk24 = createGrafico(document.getElementById('graficoDisk24'), {
-    labels: dataDisk24.entries,
+  var dataDisk24 = groupMetricsByHour(metrics.filter(m => m.tipo_componente === 'DISK'))
+  chartDisk24 = createGrafico(document.getElementById('graficoDisk24'), {
+    labels: Array.from({length: 24}, (_, index) => index.toString() + (index == 0 || index == 1 ? " Hora atrás" : " Horas atrás")).reverse(),
     datasets: [{
-      label: 'Média do uso do disco nas ultimas 24 horas',
-      data: dataDisk24
+      label: '% de uso',
+      data: dataDisk24.map(d => d.media)
     }]
-  }, options);
-  var dataMemory24 = calculateHourlyAverages(metrics.filter(m => m.tipo === 'MEMORY'))
-  var chartMemory24 = createGrafico(document.getElementById('graficoMemory24'), {
-    labels: dataMemory24.entries,
+  });
+  var dataMemory24 = groupMetricsByHour(metrics.filter(m => m.tipo_componente === 'MEMORY'))
+  chartMemory24 = createGrafico(document.getElementById('graficoMemory24'), {
+    labels: Array.from({length: 24}, (_, index) => index.toString() + (index == 0 || index == 1 ? " Hora atrás" : " Horas atrás")).reverse(),
     datasets: [{
-      label: 'Média do uso de memoria nas ultimas 24 horas',
-      data: dataMemory24
+      label: '% de uso',
+      data: dataMemory24.map(d => d.media)
     }]
-  }, options);
-  var dataLatency24 = calculateHourlyAverages(metrics.filter(m => m.tipo === 'LATENCY'))
-  var chartMemory24 = createGrafico(document.getElementById('graficoLatency24'), {
-    labels: dataLatency24.entries,
+  });
+  var dataLatency24 = groupMetricsByHour(metrics.filter(m => m.tipo_componente === 'NETWORK'))
+  chartLatency24 = createGrafico(document.getElementById('graficoLatency24'), {
+    labels: Array.from({length: 24}, (_, index) => index.toString() + (index == 0 || index == 1 ? " Hora atrás" : " Horas atrás")).reverse(),
     datasets: [{
-      label: 'Média do uso de memoria nas ultimas 24 horas',
-      data: dataLatency24
+      label: 'ping',
+      data: dataLatency24.map(d => d.media)
     }]
   }, {
     maintainAspectRatio: false, // Do not maintain aspect ratio
@@ -83,13 +85,35 @@ async function getMetrics() {
     }
   });
 
+}
 
+function groupMetricsByHour(metrics) {
+  const metricsByHour = new Map();
 
+  const now = new Date()
 
+  // Create an array with the last 24 hours
+  const last24Hours = Array.from({ length: 24 }, (_, index) => {
+    const hourTimestamp = new Date(now - (index + 3) * 60 * 60 * 1000); // Adjusted index
+    return { hour: hourTimestamp.toISOString().substring(0, 13) + ':00:00', media: 0 };
+});
 
-  const metricaUltimaHora = await fetch(`/machine/last-metrics/${machineId}`).then(res => res.json())
-  console.log(metricaUltimaHora)
+  // Populate the map with the last 24 hours
+  last24Hours.forEach(entry => metricsByHour.set(entry.hour, entry));
 
+  // Loop through the metrics and add them to the corresponding hour
+  metrics.forEach(metric => {
+      const timestamp = metric.rounded_hour; // Assuming 'timestamp' is the property name in the result
+      const hour = timestamp.substring(0, 13) + ':00:00'; // Extract the hour part from the timestamp
+
+      if (metricsByHour.has(hour)) {
+          metricsByHour.get(hour).media = metric.median_medicao
+      }
+  });
+  // Convert the map to an array of objects
+  const result = Array.from(metricsByHour.values()).reverse();
+
+  return result;
 }
   
 async function addCommand(command) {
@@ -103,50 +127,60 @@ async function addCommand(command) {
 }
 
 
-async function getMachine() {
+function getMachineId() {
   const myKeyValues = window.location.search;
   const urlParams = new URLSearchParams(myKeyValues);
 
-  var machineId = urlParams.get("id")
+  return urlParams.get("id")
 }
 
 
 
-function createGrafico(ctx, data, options) {
-  return new Chart(ctx,
-    {
-      type: 'line',
-      data: data,
-      options: options
-    }
-  )
-}
-
-function calculateHourlyAverages(data) {
-  // Create an object to store values for each hour
-  const hourGroups = {};
-
-  // Populate the hourGroups object
-  data.forEach(entry => {
-    const hour = new Date(entry.DataMetrica).getHours();
-    if (!hourGroups[hour]) {
-      hourGroups[hour] = [];
-    }
-    hourGroups[hour].push(entry.MedicaoMetrica);
+function createGrafico(ctx, data, options = {
+  maintainAspectRatio: false,
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100
+        }
+      }
+}) {
+  var g = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: options
   });
 
-  console.log(hourGroups)
-
-  // Calculate the average for each hour (considering all 24 hours)
-  const averages = {};
-  for (let hour = 1; hour <= 24; hour++) {
-    const values = hourGroups[hour] || []; // If no values for the hour, use an empty array
-    const sum = values.reduce((acc, val) => acc + val, 0);
-    averages[hour] = values.length > 0 ? sum / values.length : 0; // Prevent division by zero
+  // Atribui uma função para atualizar o grafico com dados mais recentes
+  g.updateDados = function(dados) {
+    this.data.datasets[0].data = dados.map(d => d.media)
+    this.update()
   }
 
-  return averages;
+  return g
 }
 
-function calculateHourAverages(data) {
+async function updateGraficos() {
+  var machineId = getMachineId();
+  console.log(machineId)
+
+  var data = await fetch(`/machine/metrics/${machineId}`, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(res => res.json())
+  
+  var dataCpu24 = groupMetricsByHour(data.filter(m => m.tipo_componente === 'CPU'))
+  var dataMem24 = groupMetricsByHour(data.filter(m => m.tipo_componente === 'MEMORY'))
+  var dataDisk24 = groupMetricsByHour(data.filter(m => m.tipo_componente === 'DISK'))
+  var dataLatency24 = groupMetricsByHour(data.filter(m => m.tipo_componente === 'NETWORK'))
+
+  chartCpu24.updateDados(dataCpu24)
+  chartMemory24.updateDados(dataMem24)
+  chartDisk24.updateDados(dataDisk24)
+  chartLatency24.updateDados(dataLatency24)
 }
+
+setInterval(updateGraficos, 60000)
