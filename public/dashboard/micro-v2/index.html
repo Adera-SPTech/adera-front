@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../colors.css">
+    <link rel="stylesheet" href="../sidebar/style.css" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Dashboard Adera</title>
+  </head>
+  <body onload="getMetrics()">
+    <!-- Sidebar start -->
+    <div class="sidebar" id="sidebar">
+      <ul class="sidebar-group">
+        <li>
+          <a href="#" id="hamburguer-btn">
+            <img src="../../assets/bars-solid.svg" alt="Hamburguer button" />
+          </a>
+        </li>
+        <li>
+          <a href="../home/index.html">
+            <img src="../../assets/house-solid.svg" alt="Home" />
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <img src="../../assets/sliders-solid.svg" alt="Params" />
+            <span>Parametrizações</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <img src="../../assets/user-group-solid.svg" alt="Users" />
+            <span>Usuários</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <img
+              src="../../assets/triangle-exclamation-solid.svg"
+              alt="Warnings"
+            />
+            <span>Avisos</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="sidebar-group">
+        <li>
+          <a href="" onclick="logOut()">
+            <img
+              src="../../assets/arrow-right-from-bracket-solid.svg"
+              alt="Log out"
+            />
+            <span>Sair</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Sidebar end  -->
+    <div class="main">
+      <div class="status-bar">
+        <div class="status-info"><span id="relogio">00:00</span> <span id="nome-empresa"></span></div>
+      </div>
+      <div class="content">
+        <h1 style="font-family: 'Montserrat', sans-serif;">Maquina</h1>
+        <div class="actions">
+          <h2 id="nome-maquina"></h2>
+          <button onclick="addCommand('restart')">Reiniciar</button>
+          <button onclick="addCommand('optimize')">Otimizar</button>
+        </div>
+        <div class="components">
+          <div>
+            <h3>Processador</h3>
+            <span id="modelo-cpu"></span><br>
+            <span id="desc-cpu"></span><br>
+            Uso: <span id="uso-cpu" style="font-weight: 700; color: black"></span>
+          </div>
+          <div>
+            <h3>Disco</h3>
+            <span id="modelo-disk"></span><br>
+            <span id="desc-disk"></span><br>
+            Uso: <span id="uso-disk" style="font-weight: 700; color: black"></span>
+          </div>
+          <div>
+            <h3>Memória</h3>
+            <span id="modelo-mem"></span><br>
+            <span id="desc-mem"></span><br>
+            Uso: <span id="uso-mem" style="font-weight: 700; color: black"></span>
+          </div>
+          <div>
+            <h3>Rede</h3>
+            <span id="modelo-network"></span><br>
+            <span id="desc-network"></span><br>
+            Latência: <span id="ping" style="font-weight: 700; color: black"></span>
+          </div>
+        </div>
+        <div class="main-dashboard">
+          <h1 style="font-family: 'Montserrat', sans-serif; color: #feffef;">Média do uso por hora nas últimas 24 horas</h1>
+          <div class="graficos">
+            <div class="grafico-wrapper">
+              <h1 class="titulo-grafico">CPU</h1>
+              <div>
+                <canvas id="graficoCpu24"></canvas>
+              </div>
+            </div>
+            <div class="grafico-wrapper">
+              <h1 class="titulo-grafico">Disco</h1>
+              <div>
+                <canvas id="graficoDisk24"></canvas>
+              </div>
+            </div>
+            <div class="grafico-wrapper">
+              <h1 class="titulo-grafico">Memória</h1>
+              <div>
+                <canvas id="graficoMemory24"></canvas>
+              </div>
+            </div>
+            <div class="grafico-wrapper">
+              <h1 class="titulo-grafico">Latência</h1>
+              <div>
+                <canvas id="graficoLatency24"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../sidebar/script.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

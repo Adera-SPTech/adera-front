@@ -98,9 +98,49 @@ function lastMetrics(machineId) {
   return database.executar(query)
 }
 
+async function getMachine(machineId) {
+  var queryMachine = `SELECT * FROM maquina WHERE id = '${machineId}'`
+
+  var machine = {
+    id: '',
+    name: '',
+    components: []
+  }
+
+  await database.executar(queryMachine)
+    .then(result => {
+      machine.id = result[0].id
+      machine.name = result[0].nomeMaquina
+    })
+
+  var queryComponent = `SELECT mc.modelo, mc.descricao, m.medicao, t.nome as tipo FROM maquinacomponente mc 
+                          JOIN metrica m ON mc.id = m.fkMaquinaComponente 
+                          JOIN tipocomponente t ON mc.fkTipoComponente = t.id 
+                        WHERE 
+                          mc.fkMaquina = '${machineId}' AND 
+                          m.data = (SELECT MAX(data) FROM metrica WHERE fkMaquinaComponente = mc.id);`
+
+  await database.executar(queryComponent)
+    .then(result => {
+      result.forEach(c => {
+        var comp = {
+          model: c.modelo,
+          desc: c.descricao,
+          use: c.medicao,
+          type: c.tipo
+        }
+
+        machine.components.push(comp)
+      })
+    })
+
+  return machine
+}
+
 module.exports = {
   getMachinesByEstablishmentId,
   getLastProblemByEstablishmentId,
   getMetricsByMachineId,
-  lastMetrics
+  lastMetrics,
+  getMachine
 }

@@ -27,9 +27,15 @@ function lastMetrics(req, res) {
     .then(result => res.json(result))
 }
 
+function getMachine(req, res) {
+  model.getMachine(req.params.machineId)
+    .then(result => res.json(result))
+}
+
 module.exports = {
   getMachinesByEstablishmentId,
   getLastProblemByEstablishmentId,
   getMetricsByMachineId,
-  lastMetrics
+  lastMetrics,
+  getMachine
 }

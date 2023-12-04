@@ -8,6 +8,10 @@ router.get("/:establishmentId", (req, res) => {
   machineController.getMachinesByEstablishmentId(req, res);
 })
 
+router.get("/m/:machineId", (req, res) => {
+  machineController.getMachine(req, res);
+})
+
 router.get("/problem/:establishmentId", (req, res) => {
   machineController.getLastProblemByEstablishmentId(req, res);
 })
