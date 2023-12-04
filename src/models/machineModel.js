@@ -32,6 +32,48 @@ WHERE
   return database.executar(query)
 }
 
+function getLast10(machineID) {
+  var query = `
+      WITH MetricasNumeradas AS (
+        SELECT
+            m.id AS metrica_id,
+            m.medicao,
+            m.data,
+            m.alertado,
+            mc.id AS maquina_componente_id,
+            mc.modelo,
+            mc.descricao,
+            mc.capacidade,
+            mc.ativo,
+            tc.nome AS tipo_componente,
+            ROW_NUMBER() OVER (PARTITION BY mc.id ORDER BY m.data DESC) AS row_num
+        FROM
+            metrica m
+            INNER JOIN maquinacomponente mc ON m.fkMaquinaComponente = mc.id
+            INNER JOIN tipocomponente tc ON mc.fkTipoComponente = tc.id
+        WHERE
+            mc.fkMaquina = 'E1B3E600-EF7C-11ED-9ACF-927A4326EF00'
+    )
+    SELECT
+        metrica_id,
+        medicao,
+        data,
+        alertado,
+        maquina_componente_id,
+        modelo,
+        descricao,
+        capacidade,
+        ativo,
+        tipo_componente
+    FROM
+        MetricasNumeradas
+    WHERE
+        row_num <= 10;
+  `
+
+  return database.executar(query)
+}
+
 function getLastProblemByEstablishmentId(establishmentId) {
   var query = `select * from last_problem where establishment_id = '${establishmentId}'`
   return database.executar(query);
@@ -142,5 +184,6 @@ module.exports = {
   getLastProblemByEstablishmentId,
   getMetricsByMachineId,
   lastMetrics,
-  getMachine
+  getMachine,
+  getLast10
 }

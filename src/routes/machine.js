@@ -24,4 +24,8 @@ router.get("/last-metrics/:machineId", (req, res) => {
   machineController.lastMetrics(req, res)
 })
 
+router.get("/last10/:machineId", (req, res) => {
+  machineController.getLast10(req, res)
+})
+
 module.exports = router;

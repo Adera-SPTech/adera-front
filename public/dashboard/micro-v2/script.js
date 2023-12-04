@@ -5,6 +5,11 @@ var chartDisk24;
 var chartMemory24;
 var chartLatency24;
 
+var chartCpu10;
+var chartDisk10;
+var chartMemory10;
+var chartLatency10;
+
 document.getElementById("nome-empresa").innerHTML = sessionStorage.establishmentName;
 var dataAtual = new Date();
 var horas = dataAtual.getHours();
@@ -73,6 +78,13 @@ async function getMetrics() {
     }
   }).then(res => res.json())
 
+  const metrics10 = await fetch(`/machine/last10/${machineId}`, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(res => res.json())
+
   var dataCpu24 = groupMetricsByHour(metrics.filter(m => m.tipo_componente === 'CPU'))
 
   const ctxGrafCpu24 = document.getElementById('graficoCpu24')
@@ -116,6 +128,48 @@ async function getMetrics() {
       }
     }
   });
+
+
+  var dataCpu10 = metrics10.filter(m => m.tipo_componente === 'CPU')
+  chartCpu10 = createGrafico(document.getElementById('graficoCpu10'), {
+    labels: Array.from({length: 10}, (_, index) => (index * 2).toString() + "s atrás").reverse(),
+    datasets: [{
+      label: '% de uso',
+      data: dataCpu10.map(d => d.medicao)
+    }]
+  })
+  var dataDisk10 = metrics10.filter(m => m.tipo_componente === 'DISK')
+  chartDisk10 = createGrafico(document.getElementById('graficoDisk10'), {
+    labels: Array.from({length: 10}, (_, index) => (index * 2).toString() + "s atrás").reverse(),
+    datasets: [{
+      label: '% de uso',
+      data: dataDisk10.map(d => d.medicao)
+    }]
+  })
+  var dataMem10 = metrics10.filter(m => m.tipo_componente === 'MEMORY')
+  chartMemory10 = createGrafico(document.getElementById('graficoMemory10'), {
+    labels: Array.from({length: 10}, (_, index) => (index * 2).toString() + "s atrás").reverse(),
+    datasets: [{
+      label: '% de uso',
+      data: dataMem10.map(d => d.medicao)
+    }]
+  })
+  var dataLatency10 = metrics10.filter(m => m.tipo_componente === 'NETWORK')
+  chartLatency10 = createGrafico(document.getElementById('graficoLatency10'), {
+    labels: Array.from({length: 10}, (_, index) => (index * 2).toString() + "s atrás").reverse(),
+    datasets: [{
+      label: 'ping',
+      data: dataLatency10.map(d => d.medicao)
+    }]
+  }, {
+    maintainAspectRatio: false, // Do not maintain aspect ratio
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  })
 
 }
 
@@ -186,7 +240,7 @@ function createGrafico(ctx, data, options = {
 
   // Atribui uma função para atualizar o grafico com dados mais recentes
   g.updateDados = function(dados) {
-    this.data.datasets[0].data = dados.map(d => d.media)
+    this.data.datasets[0].data = dados
     this.update()
   }
 
@@ -203,19 +257,36 @@ async function updateGraficos() {
       "Content-Type": "application/json"
     }
   }).then(res => res.json())
+
+  var data10 = await fetch(`/machine/last10/${machineId}`, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(res => res.json())
   
   var dataCpu24 = groupMetricsByHour(data.filter(m => m.tipo_componente === 'CPU'))
   var dataMem24 = groupMetricsByHour(data.filter(m => m.tipo_componente === 'MEMORY'))
   var dataDisk24 = groupMetricsByHour(data.filter(m => m.tipo_componente === 'DISK'))
   var dataLatency24 = groupMetricsByHour(data.filter(m => m.tipo_componente === 'NETWORK'))
 
-  chartCpu24.updateDados(dataCpu24)
-  chartMemory24.updateDados(dataMem24)
-  chartDisk24.updateDados(dataDisk24)
-  chartLatency24.updateDados(dataLatency24)
+  var dataCpu10 = data10.filter(d => d.tipo_componente === 'CPU')
+  var dataMem10 = data10.filter(d => d.tipo_componente === 'MEMORY')
+  var dataDisk10 = data10.filter(d => d.tipo_componente === 'DISK')
+  var dataLatency10 = data10.filter(d => d.tipo_componente === 'NETWORK')
+
+  chartCpu24.updateDados(dataCpu24.map(d => d.media))
+  chartMemory24.updateDados(dataMem24.map(d => d.media))
+  chartDisk24.updateDados(dataDisk24.map(d => d.media))
+  chartLatency24.updateDados(dataLatency24.map(d => d.media))
+
+  chartCpu10.updateDados(dataCpu10.map(d => d.medicao))
+  chartMemory10.updateDados(dataMem10.map(d => d.medicao))
+  chartDisk10.updateDados(dataDisk10.map(d => d.medicao))
+  chartLatency10.updateDados(dataLatency10.map(d => d.medicao))
 }
 
-setInterval(updateGraficos, 60000)
+setInterval(updateGraficos, 2000)
 
 getMachine()
 setInterval(getMachine, 10000)

@@ -32,10 +32,16 @@ function getMachine(req, res) {
     .then(result => res.json(result))
 }
 
+function getLast10(req, res) {
+  model.getLast10(req.params.machineId)
+    .then(result => res.json(result))
+}
+
 module.exports = {
   getMachinesByEstablishmentId,
   getLastProblemByEstablishmentId,
   getMetricsByMachineId,
   lastMetrics,
-  getMachine
+  getMachine,
+  getLast10
 }

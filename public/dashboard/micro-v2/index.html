@@ -11,7 +11,7 @@
   </head>
   <body onload="getMetrics()">
     <!-- Sidebar start -->
-    <div class="sidebar" id="sidebar">
+    <div class="sidebar" id="sidebar" style="position: fixed;">
       <ul class="sidebar-group">
         <li>
           <a href="#" id="hamburguer-btn">
@@ -59,12 +59,12 @@
       </ul>
     </div>
     <!-- Sidebar end  -->
-    <div class="main">
+    <div class="main" style="margin-left: 7rem;">
       <div class="status-bar">
         <div class="status-info"><span id="relogio">00:00</span> <span id="nome-empresa"></span></div>
       </div>
       <div class="content">
-        <h1 style="font-family: 'Montserrat', sans-serif;">Maquina</h1>
+        <h1 style="font-family: 'Montserrat', sans-serif;">Máquina</h1>
         <div class="actions">
           <h2 id="nome-maquina"></h2>
           <button onclick="addCommand('restart')">Reiniciar</button>
@@ -121,6 +121,34 @@
               <h1 class="titulo-grafico">Latência</h1>
               <div>
                 <canvas id="graficoLatency24"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <h1 style="margin-top: 1rem; font-family: 'Montserrat', sans-serif; color: #feffef;">Uso nos últimos segundos</h1>
+          <div class="graficos">
+            <div class="grafico-wrapper">
+              <h1 class="titulo-grafico">CPU</h1>
+              <div>
+                <canvas id="graficoCpu10"></canvas>
+              </div>
+            </div>
+            <div class="grafico-wrapper">
+              <h1 class="titulo-grafico">Disco</h1>
+              <div>
+                <canvas id="graficoDisk10"></canvas>
+              </div>
+            </div>
+            <div class="grafico-wrapper">
+              <h1 class="titulo-grafico">Memória</h1>
+              <div>
+                <canvas id="graficoMemory10"></canvas>
+              </div>
+            </div>
+            <div class="grafico-wrapper">
+              <h1 class="titulo-grafico">Latência</h1>
+              <div>
+                <canvas id="graficoLatency10"></canvas>
               </div>
             </div>
           </div>
