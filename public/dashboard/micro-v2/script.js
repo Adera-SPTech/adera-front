@@ -218,3 +218,4 @@ async function updateGraficos() {
 setInterval(updateGraficos, 60000)
 
 getMachine()
+setInterval(getMachine, 10000)
